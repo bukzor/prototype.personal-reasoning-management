@@ -15,3 +15,7 @@ superseded once the procurement question closes.
 - V2_SHORTLIST: v2 shortlist = {F\*}; {Rocq} contingent on revoking its dominance claim
 - DEDUKTI <- CHECKER: Dedukti/Lambdapi recorded as candidate shared spine for cross-substrate hashing; deferred
 - BUILD_ORDER <- TURN_SCARCITY, MM_DESCRIBE: Build order Lean4 → Metamath → Agda → Isabelle → ACL2; Metamath second because it falsifies CMD_SURFACE assumptions more cheaply than any other arm
+- DAILY_CRITERIA <- PROCURE: The utility function is daily pleasure of use — snappy CLI, clean syntax, easy and fast CI, general snappiness -- authority: user
+- PLEASURE_RANK <- DAILY_CRITERIA, CMD_SURFACE: Only Lean4 satisfies all of DAILY_CRITERIA, because it absorbs CMD_SURFACE as native syntax and inherits the LSP; ranking is Lean4 > Metamath > Isabelle > ACL2 > Agda (see L5-experiment.kb/)
+- SPLIT <- PLEASURE_RANK, LEDGER_BESIDE: Pleasure decomposes along the ledger-beside-engine seam: ledger pleasure is maximized by Metamath by an order of magnitude, authoring pleasure by Lean4; no single arm maximizes both
+- HYBRID? <- SPLIT, PROCURE: Procurement may have no single-substrate answer — a Lean4-authoring / Metamath-or-Dedukti-checking split, promoting DEDUKTI, is the configuration that would feel good end-to-end
