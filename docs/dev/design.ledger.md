@@ -10,12 +10,14 @@ labelled claims, premise arrows, standing marked in place. One file per
 
 ## Stratification
 
-Levels are the ledger's own layering discipline: **each level consumes only
-lower levels.** A premise arrow pointing upward is a defect, not a variant.
+Levels are the ledger's own layering discipline: **L1–L5 consume only lower
+levels.** A premise arrow pointing upward inside the tower is a defect, not a
+variant. L0 sits outside the tower — it is about how the design gets made, so
+it cites the design and the design cites it.
 
 | Level | Scope | Substrate-free? |
 |---|---|---|
-| L0 | Process — how the discourse itself is conducted | yes |
+| L0 | Process — how the discourse itself is conducted | orthogonal |
 | L1 | Ontology — what a claim is | yes |
 | L2 | Derived structure — status, identity, trust, staleness | yes |
 | L3 | Architecture — the host-encoding commitments | one commitment |

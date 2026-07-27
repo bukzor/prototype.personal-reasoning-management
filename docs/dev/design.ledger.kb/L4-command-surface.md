@@ -4,7 +4,7 @@ The object intended to be frozen: an abstract set of verbs, instantiated once
 per substrate. What a user of the system actually touches.
 
 - CMD_SURFACE <- LEDGER_BESIDE, DESIGN_FIAT: The fixed cross-substrate object is an abstract command surface — claim / describe / stipulate / assert / warrant / status / stale — instantiated via each host's extension or embedding mechanism
-- VERB_TARGETS <- HYP_FIAT: Verb targets: shallow → ledger-only; described → statement object; stipulate → telescope extension (Lean bundled structures, Isabelle locales, Agda module parameters, Metamath `$e`-frames or antecedent form, ACL2 `encapsulate`); assert → warrant-application term submitted to the kernel; proven → host theorem
+- VERB_TARGETS <- HYP_FIAT, DEPTH_ATTEST: Verb targets: shallow → ledger-only; described → statement object; stipulate → telescope extension (Lean bundled structures, Isabelle locales, Agda module parameters, Metamath `$e`-frames or antecedent form, ACL2 `encapsulate`); assert → warrant-application term submitted to the kernel; proven → host theorem
 - NO_AXIOMS <- CHECKER, VERDICT: Verdict-claims live in the ledger only, never as host axioms
 - V1_CHECKERS <- CHECKER, DELEGATE: v1 checkers = host kernel + staleness scanner; TRUST_BASE delegates to native assumption tracking where present
 - NO_SIDECAR <- LEDGER_BESIDE: Persistence is host-native state, no external sidecar in v1
