@@ -2,6 +2,7 @@
 git-caution: personal
 requires:
     - Skill(llm-discourse-graph)
+    - Skill(llm-claim-ledger)
 depends:
     - Skill(llm-subtask)
 ---
@@ -11,8 +12,11 @@ depends:
 A framework for defeasible claims and their mandates/authority/proofs,
 built in Lean 4.
 
-- Design: `docs/dev/design-sketch.md`
-- Setup discourse: `docs/dev/initial-setup.discourse.kb/`
+- Design rationale, in prose: `docs/dev/design-sketch.md`
+- Design ledger — the labelled claims the design commits to, by level:
+  `docs/dev/design.ledger.md`
+- Setup discourse — questions and claims about the toolchain:
+  `docs/dev/initial-setup.discourse.kb/`
 
 ## Current Work
 
