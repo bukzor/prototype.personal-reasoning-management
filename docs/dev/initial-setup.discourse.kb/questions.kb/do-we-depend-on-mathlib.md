@@ -1,6 +1,5 @@
 ---
-candidate-resolutions:
-  - ../claims.kb/start-with-batteries-only.md
+resolved: ../claims.kb/start-with-batteries-only.md
 sources:
   - ../sources.kb/assistant.md
 depends:
@@ -10,7 +9,7 @@ tags: [dependencies]
 
 # Do we depend on Mathlib?
 
-The single biggest fork in the setup: it determines CI cache strategy,
-build times, and toolchain-upgrade cadence. Depends on the defeasibility
-design — if we lean on order/lattice theory for defeat relations,
-Mathlib gets attractive.
+Was the biggest fork in the setup (CI cache strategy, build times,
+toolchain-upgrade cadence). Resolved 2026-07-27 by bukzor: "No mathlib.
+I won't be using it, not soon." Note: the design sketch's line about
+wanting Mathlib "for DTPL metatheory" is overridden by this decision.

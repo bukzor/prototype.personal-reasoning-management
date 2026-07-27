@@ -14,3 +14,7 @@ auto-detected from the workspace), `.lake/` caching keyed on manifest +
 commit, and Mathlib cache download when applicable. Useful knobs:
 `build-args: "--wfail"` to fail on warnings (including `sorry`).
 CD (docs to Pages) is a separate later step.
+
+Amendment per the design sketch: the workflow grows two project-specific
+steps after lean-action — `lake exe scan` (fail on stale claims) and,
+later, a lean4export/lean4checker external-kernel audit of `Corpus/`.

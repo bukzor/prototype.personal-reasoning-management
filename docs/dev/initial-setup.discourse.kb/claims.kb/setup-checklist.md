@@ -15,7 +15,7 @@ autoformatting), a Lean 4 repo needs:
   decision, not an afterthought.
 - **Build/deps** — Lake (`lakefile.toml`) + committed `lake-manifest.json`
   lockfile; `leanprover-community/lean-update` action can automate bumps.
-- **Dependency policy** — Batteries vs Mathlib decision
+- **Dependency policy** — resolved: no Mathlib; Batteries likely
   (see `../questions.kb/do-we-depend-on-mathlib.md`).
 - **Linting** — `lake lint` with the Batteries `@[lint_driver]` framework;
   this substitutes for autoformatting (see
@@ -28,8 +28,8 @@ autoformatting), a Lean 4 repo needs:
 - **Learning path** — bukzor has never used Lean; *Functional Programming
   in Lean* is the right first book for building a framework (vs *Theorem
   Proving in Lean 4*, which is proof-centric).
-- **Design shape** — how defeasibility embeds in Lean's monotonic logic
-  (see `../questions.kb/how-does-defeasibility-fit-leans-logic.md`);
-  affects whether the repo is library-only or library + DSL/executable.
+- **Design shape** — settled at setup level by the design sketch
+  (`Ledger/` library + `Corpus/` + `lake exe scan`; see
+  `design-sketch-settles-repo-shape.md`); deeper discussion deferred.
 - **Deferred** — publishing to Reservoir (Lean package registry),
   versioned releases.
