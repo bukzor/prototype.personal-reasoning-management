@@ -31,6 +31,16 @@ Framework build order (from `docs/dev/design-sketch.md`; vertical slice first �
 - [ ] `Ledger/Query.lean`: `#status` / `#stale` / `#trustbase` over the value; `lake exe` twins for CI
 - [ ] `Corpus/`: port prior theories (`stance`, `ledger`, `conduct`, `convention`) — system describes itself
 
+Ledger hygiene:
+
+- [ ] Certification review pass over the remaining bare/`+` claims — pure
+      derivations and world empiricals are agent reasoning with no recorded
+      review; certify or contest each in fresh context, landing
+      `-- certified(review NNN)` trailers. The implied-ratification set
+      (HYP_CONTENT, HASH_ID, SURFACE_SPLIT, ACCEPTED, DEPTH_ATTEST,
+      PROJECTION, MONOTONE, CHECKER, DEFEAT) counts as settled by
+      restatement inside user-ruled texts unless the user rejects that device.
+
 ## Later
 
 We haven't (yet) decided where to place these in the task queue.
