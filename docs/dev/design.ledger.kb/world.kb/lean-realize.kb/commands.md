@@ -1,11 +1,12 @@
 # Commands — verbs and queries
 
-`CMD_SURFACE` verbs are `elab` commands in `Lean.Elab.Command`, so the LSP
-serves hover, goto and completion on them like any other syntax. `stipulate`
-yields a `structure Frame`; `assert` a `theorem c (f : Frame) : Q`
-(see `frames.md`).
+Authoring verbs land on the kb surface: each verb is an edit to `.kb/`
+frontmatter that the generator ingests (see `translator.md`); there are no
+`elab` authoring commands. The LSP still serves the result, because the
+generated module is plain Lean.
 
-Queries are derived, per `INTROSPECT`: `#trustbase` is `collectAxioms` over
-the frame's fields; `#stale` is a metaprogram over the environment, also
-exposed as `lake exe scan` for CI. Derived means the ledger cannot disagree
-with the proofs.
+Queries are functions over `ledger`, exposed as `#status` / `#stale` /
+`#trustbase` for the editor and as `lake exe` commands for CI. `#trustbase` is
+the claim's hypotheses plus `collectAxioms` over its proof; `#stale` evaluates
+the staleness conjunct of `WellFormed` (see `laws.md`). Derived from the
+value, per `INTROSPECT`: the ledger cannot disagree with the proofs.

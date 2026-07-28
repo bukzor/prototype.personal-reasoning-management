@@ -21,13 +21,12 @@ substrate scores, and what it costs.
 
 ## The price
 
-- `CHURN` — point releases break metaprograms, and `elab` commands plus
-  environment extensions are exactly the exposed surface. Mitigation is
-  structural: keep the command layer thin, put the logic in the core and scanner
-  modules where the API is stable.
+- `CHURN` — point releases break metaprograms. The registry-as-value
+  realization keeps the exposed surface small — `Syntax` hashing and the
+  generator, no `elab` commands or environment extensions in the trunk.
 - `HASH_FORMAL` — accept re-verification on toolchain bumps rather than
   fighting for cross-version identity (mechanics: `lean-realize.kb/hashing.md`).
-- `TRUST_COST` — the verdict machinery runs in the elaborator, not the kernel,
-  so the tooling sits inside the thing being audited. `AUDIT_SPOKE`
-  (lean4export + lean4checker in CI) is the hedge, and the only one available
-  since `TRUST_SWAP` is forfeit.
+- `TRUST_COST` — what stays outside the kernel is the generator and any
+  `native_decide` law, each a recorded trade. `AUDIT_SPOKE` (lean4export +
+  lean4checker in CI) is the hedge, and the only one available since
+  `TRUST_SWAP` is forfeit.

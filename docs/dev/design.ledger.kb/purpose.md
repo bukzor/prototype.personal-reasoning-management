@@ -10,6 +10,6 @@ utility function. Says what is wanted, never what supplies it.
   function
 
 - PROCURE!: Purpose is procurement — selecting one system to use daily for the user's own reasoning -- authority: user
-- CORPUS!: The claim corpus is dependently-typed-programming-language (DTPL) metatheory and verified implementation -- authority: user
+- CORPUS!: The claim corpus is the user's own reasoning, across all realms; dependently-typed-programming-language (DTPL) metatheory and verified implementation is the first realm, the one where constructive claims pay most -- authority: user
 - DAILY_CRITERIA! <- PROCURE!: The utility function is daily pleasure of use — snappy CLI, clean syntax, easy and fast CI, general snappiness -- authority: user
 - UNDOMINATED <- PROCURE!: Candidate-set membership = undominated ∧ prima facie viable; dominated arms buy no procurement information

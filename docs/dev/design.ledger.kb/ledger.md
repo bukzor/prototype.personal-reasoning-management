@@ -5,7 +5,7 @@ trust, and the propagation of change. The theory the system is a ledger *of*.
 
 - `prior:` stance
 - `ontology:` claim, stipulation, assertion, warrant, authority, checker,
-  verdict, depth, status, hypothesis, hash, trust base, staleness
+  verdict, depth, status, hypothesis, hash, trust base, staleness, law
 - `defeated by:` a second node type — anything that must be represented and is
   not a claim
 
@@ -21,8 +21,11 @@ trust, and the propagation of change. The theory the system is a ledger *of*.
 - HYP_CONTENT: A claim's hypotheses are part of its statement content, not an annotation on it
 - DEPTH_ATTEST <- VERDICT!, CHECKER: Depth-verdicts attest artifact existence — shallow = no verdict, described = a checker verdict on a statement object, proof = a checker verdict on a proof object
 - HASH_ID: Claim identity is a content hash of the surface statement; names are mutable pointers; staleness = a dependent proven against a superseded hash
+- SURFACE_SPLIT <- HASH_ID: Authoring surface and system of record are separable because identity is content — a claim hashed from any surface is the same claim, so the surface can optimize for entry cost and the record for verification, neither constraining the other
 - MONOTONE <- HASH_ID, VERDICT!: The verdict record is append-only and monotone, and this is derived rather than imposed: a verdict attaches to a content hash, so "checker C accepted claim #a3f" is a historical fact nothing later falsifies. A claim's *change* repoints a name to a new hash — that is staleness, not revocation — and an authority's *fall from trust* is a filter applied at query time, not a mutation of the record. Revocation is thus not forbidden but unrepresentable
 - ACCEPTED <- MONOTONE: A verdict is *accepted* iff it is recorded; presence is acceptance. Nothing adjudicates between authorities, so there is no global "accepted" — a claim can be simultaneously proven-per-checker and retracted-per-user, and reporting both unreconciled is the point. Adjudicating would be the ledger evaluating a proposition
 - STATUS <- VERDICT!, DEPTH_ATTEST, ACCEPTED: A claim's status is the set of authorities of accepted verdicts about it. Set-valued rather than a ladder because real checkers disagree — typechecking, termination and positivity are separate checkers, and one definition can pass some and fail others — so the shallow/described/proof ladder is a special case of the checker set, not the general shape
+- META_DEPTH <- CLAIMS_ONLY!, DEPTH_ATTEST, LEAST_FIX+: A law — a claim about the claim set — is an ordinary claim and climbs the same depth ladder: stated, described, proven. Nothing in this ontology caps a law's depth, so a realization that caps it below proof is defective, not different; LEAST_FIX's inductive provenness is the first law
 - TRUST_BASE <- HYP_CONTENT, VERDICT!: Trust base = the claim's hypotheses ∪ the axioms admitted at the corpus boundary ∪ the authorities of its verdicts; the first component is checker-enforced
+- CHECKER_COLLAPSE <- CHECKER, TRUST_BASE: The trusted code CHECKER terminates in is not a fixed floor: a checker's judgment, restated as a claim the proof-checker itself can evaluate, moves that checker out of the trust base. Checkers above the proof-checker are reducible trust debt; the floor is the one checker every proof already pays for
 - STALE_PROP <- HYP_CONTENT, HASH_ID: Stipulation revision propagates staleness automatically, since hypotheses are statement content
