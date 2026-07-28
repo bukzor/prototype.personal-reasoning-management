@@ -30,13 +30,20 @@ def findKey (block : List String) (key : String) : Option String :=
       some ((l.drop (key.length + 1)).copy.trimAscii.copy)
     else none
 
-/-- The load-bearing declaration line each authored artifact must have
-produced in the generated module; docstrings and layout stay decor. -/
-def expectedDecls (label : Lean.Name) (stmt proofTactic : Option String) :
-    List String :=
+/-- The load-bearing declaration line each authored key must have produced
+in the generated module; docstrings and layout stay decor. `authority:`
+dictates a frame field: the claim's statement when described, `True` when
+informal -- named in the trust base either way. -/
+def expectedDecls (label : Lean.Name) (theory : String)
+    (stmt proofTactic authority : Option String) : List String :=
   (stmt.map fun s => s!"abbrev C.{label}.stmt : Prop := {s}").toList
     ++ (proofTactic.map fun p =>
-      s!"theorem C.{label}.pf : C.{label}.stmt := by {p}").toList
+      s!"theorem C.{label}.pf (f : Frame.{theory}) : C.{label}.stmt := by {p}").toList
+    ++ (authority.map fun _ =>
+      let ty := match stmt with
+        | some _ => s!"C.{label}.stmt"
+        | none => "True"
+      s!"  {label} : {ty}").toList
 
 /-- Does the compiled depth match what the authored keys pay for? -/
 def depthMatches : Depth → Option String → Option String → Bool
@@ -86,7 +93,8 @@ def main : IO UInt32 := do
       ok := false
       IO.eprintln s!"roundtrip mismatch: {path}"
       IO.eprintln s!"  {row.label}: compiled depth disagrees with authored stmt:/proof: keys"
-    for want in expectedDecls row.label stmt proofTactic do
+    for want in expectedDecls row.label (theoryOf path) stmt proofTactic
+        (findKey block "authority") do
       unless (genText.splitOn want).length > 1 do
         ok := false
         IO.eprintln s!"roundtrip mismatch: {path}"

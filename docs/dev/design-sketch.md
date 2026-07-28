@@ -104,13 +104,19 @@ granularity arbitrary, the mechanism not (`HYP_FIAT!`, `FRAME_BUNDLE+`):
 
 ```lean
 structure Frame.stance where
-  REGRESS_ACT : Stmt.REGRESS_ACT          -- one field per stipulation
+  REGRESS_ACT : C.REGRESS_ACT.stmt        -- one field per stipulation
+  DECREE : True                           -- informal stipulation: named, no force
 
 structure Frame.ledger extends Frame.stance where
-  LAST_WINS : Stmt.LAST_WINS
+  LAST_WINS : C.LAST_WINS.stmt
 
-theorem C.STALE_PROP.pf (f : Frame.ledger) : Stmt.STALE_PROP := …
+theorem C.STALE_PROP.pf (f : Frame.ledger) : C.STALE_PROP.stmt := …
 ```
+
+Every proof threads its theory's frame, used or not, so a claim's shape
+never changes when a frame dependency appears. An informal stipulation
+(no `stmt:`) fields as `True` — named in the trust base, carrying no
+propositional force until described.
 
 Trust base of an assertion = its frame's fields ∪ `collectAxioms` over its
 proof — computed, never listed by hand (`TRUST_BASE`, `INTROSPECT`).

@@ -17,6 +17,13 @@ def corpusFiles (root : FilePath) : IO (Array FilePath) := do
       && (p.parent.map (·.toString.endsWith ".kb")).getD false
   pure <| files.qsort (·.toString < ·.toString)
 
+/-- The theory a corpus file belongs to: its `.kb` directory's stem. Shared
+like the traversal -- both executables must bucket claims identically. -/
+def theoryOf (path : FilePath) : String :=
+  match path.parent >>= (·.fileName) with
+  | some dir => (dir.dropEnd ".kb".length).copy
+  | none => ""
+
 /-- The authored frontmatter: the lines strictly between the opening and
 closing `---`. -/
 def frontmatterLines (path : FilePath) (contents : String) : IO (List String) := do

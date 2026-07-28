@@ -36,7 +36,8 @@ claims in the kernel — the row is present, and the hash literal `gen` emitted
 is what the library's own hash function computes from the emitted text. -/
 
 #guard Corpus.ledger.map (·.row.label)
-  = [`DEMO_DESCRIBED, `DEMO_PROVEN, `ASSERT, `LEAST_FIX]
+  = [`DEMO_DESCRIBED, `DEMO_FRAMED, `DEMO_PROVEN, `DEMO_STIPULATED,
+     `ASSERT, `LEAST_FIX]
 #guard Corpus.C.LEAST_FIX.hash = ContentHash.ofText Corpus.C.LEAST_FIX.text
 
 /-! Depth artifacts (`DEPTH_ATTEST`): each generated cell carries the depth
@@ -51,7 +52,15 @@ def depthKind : Depth → String
   | .proven _ _ => "proven"
 
 #guard Corpus.ledger.map (fun c => depthKind c.depth)
-  = ["described", "proven", "stated", "stated"]
+  = ["described", "proven", "proven", "described", "stated", "stated"]
 
-example : Corpus.C.DEMO_PROVEN.stmt := Corpus.C.DEMO_PROVEN.pf
+example : Corpus.C.DEMO_PROVEN.stmt := Corpus.C.DEMO_PROVEN.pf ⟨by decide⟩
 example : Corpus.C.DEMO_DESCRIBED.stmt := fun n => Nat.add_zero n
+
+/-! Frames (`FRAME_BUNDLE+`): a stipulation is a frame field, never an
+axiom, and a framed proof only discharges under a frame instance -- the
+grant is visible at every use site. -/
+
+example : Corpus.C.DEMO_FRAMED.stmt :=
+  Corpus.C.DEMO_FRAMED.pf { DEMO_STIPULATED := by decide }
+example (f : Corpus.Frame.ledger) : True := f.LEAST_FIX

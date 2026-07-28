@@ -159,8 +159,33 @@ Framework build order (from `docs/dev/design-sketch.md`; vertical slice first �
   - negatives verified: `proof:` without `stmt:` fails gen; a misstated
     described `stmt` (elaborates fine, laws blind to it) and a dropped
     depth cell both fail roundtrip
-- [ ] `Corpus/Frames.lean`: `stipulate` frames, generated alongside the rows
+- [x] `Corpus/Frames.lean`: `stipulate` frames, generated alongside the rows
       (hypothesis bundles, never `axiom`)
+  - three design calls made by user 2026-07-28: every stipulation fields
+    (typed by its `stmt` when described, `True` when informal -- named in
+    the trust base, no propositional force); every proof threads
+    `(f : Frame.θ)` uniformly, cell records the implication
+    `.proven (Frame.θ → C.X.stmt) C.X.pf`; poset (`extends` along priors)
+    deferred to the theory-port item, flat frames until then
+  - frames are emitted inline in `Corpus/Generated.lean`, not a separate
+    file: field types need the stmt abbrevs and the pf theorems need the
+    frames, so a separate `Frames.lean` would force a three-way split.
+    Emission is theory-grouped (path sort makes theories contiguous):
+    stmts+rows, frame, proofs
+  - theory = the `.kb` dir's stem (`theoryOf` in `Gen/Common`, shared
+    like the traversal); an empty/`True`-only frame lands in `Prop`, so
+    frame instances are anonymous-constructor (`⟨…⟩`), not `\{}`
+  - two lint layers had to be silenced for the designed unused-frame
+    case: elaboration's `linter.unusedVariables` (`set_option … in`, and
+    it must precede the docstring) and Batteries' `unusedArguments`
+    (`@[nolint]`, declared in `Batteries.Tactic.Lint.Misc`, now imported
+    by the generated header)
+  - roundtrip audits the frame surface: `authority:` dictates an exact
+    field line in the generated text, and the pf decl line now carries
+    the binder
+  - negatives verified: withdrawing `authority:` from the stipulation
+    breaks the framed proof at elaboration (the grant is load-bearing);
+    a renamed frame field, invisible to every law, fails roundtrip
 - [ ] Dependency edges walked from proof terms; `#trustbase` = frame fields ∪ `collectAxioms`
 - [ ] `Ledger/Query.lean`: `#status` / `#stale` / `#trustbase` over the value; `lake exe` twins for CI
 - [ ] `corpus/`: port prior theories (`stance`, `ledger`, `conduct`, `convention`) — system describes itself
