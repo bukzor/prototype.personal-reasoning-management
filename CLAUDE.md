@@ -15,6 +15,8 @@ built in Lean 4.
 - Design rationale, in prose: `docs/dev/design-sketch.md`
 - Design ledger — the labelled claims the design commits to, by theory:
   `docs/dev/design.ledger.md`
+- User stories — the demands the design must serve, gaps marked
+  `[!QUESTION]`: `docs/dev/user-stories.kb/`
 - Setup discourse — questions and claims about the toolchain:
   `docs/dev/initial-setup.discourse.kb/`
 
