@@ -11,7 +11,8 @@ premise entirely.
 STATUS, PROJECTION (staleness is a projection over hash-attached
 verdicts, and acknowledgement is a fresh verdict at the current hash —
 degree repriceable — so acknowledged debt is representable, not a new
-mechanism).
+mechanism), UNFORCED! (re-adjudicating *over days, at my own pace* is
+exactly the deferral entitlement it names).
 
 > [!QUESTION] is staleness build-failure or acknowledged debt?
 > Mechanism settled by PROJECTION; what remains is only policy: whether
