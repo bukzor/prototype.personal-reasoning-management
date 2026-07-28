@@ -1,6 +1,7 @@
 name = "Ledger"
 version = "0.1.0"
 defaultTargets = ["Ledger"]
+testDriver = "test"
 
 # Pinned to the tag matching lean-toolchain, not `main`: the manifest is the
 # record, and a floating rev makes every fetch a fresh trust decision.
@@ -11,3 +12,13 @@ rev = "v4.32.0"
 
 [[lean_lib]]
 name = "Ledger"
+
+# Neither is in defaultTargets: `lake build` stays the corpus check, `lake test`
+# the harness. CI runs both.
+[[lean_lib]]
+name = "Test"
+globs = ["Test.+"]
+
+[[lean_exe]]
+name = "test"
+root = "Test.Main"

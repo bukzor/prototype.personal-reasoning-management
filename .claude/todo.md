@@ -32,7 +32,14 @@ Setup spine (each item ≈ one small commit; sequenced so each verifies the prev
   - also turned on `leanchecker: true` now rather than at the AUDIT_SPOKE
     item — the action bundles the checker for toolchains ≥ v4.28.0-rc1, so
     the hedge costs one line today instead of a build step later
-- [ ] Test skeleton: `Test/` module + `testDriver` in lakefile; one trivial `#guard` + one runtime assertion; `lake test` green locally and in CI
+- [~] Test skeleton: `Test/` module + `testDriver` in lakefile; one trivial `#guard` + one runtime assertion; `lake test` green locally and in CI
+  - `Test/Basic.lean` (`#guard`, kernel, build time) + `Test/Main.lean`
+    (runtime, exit code); `testDriver = "test"`. Both halves verified to
+    *fail* when broken, then restored — a harness that cannot fail is decor.
+  - `lean_lib Test` with `globs` is load-bearing: an exe root alone does not
+    get its in-package imports built (`Test/Basic.olean does not exist`).
+  - both assertions read `hello` from the scaffold `Ledger/Basic.lean`;
+    re-point them when `Ledger/Core.lean` replaces it
 - [ ] Lint skeleton: Batteries `@[lint_driver]`; `lake lint` green locally and in CI
 - [x] README + license — Apache-2.0 by reference to the canonical online
       copy (user's call, 2026-07-28); note GitHub's license auto-detection
