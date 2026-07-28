@@ -6,11 +6,15 @@ Setup spine (each item ≈ one small commit; sequenced so each verifies the prev
 
 - [x] Breadth-first setup discourse graph (`docs/dev/initial-setup.discourse.kb/`)
 - [x] elan via brew; Brewfile
-- [ ] `lake init`: `lean-toolchain` pin (latest stable), root module `Ledger`, `.gitignore` (`.lake/`); `lake build` green
+- [x] `lake init`: `lean-toolchain` pin (latest stable), root module `Ledger`, `.gitignore` (`.lake/`); `lake build` green
   - lakefile.toml — decided 2026-07-28 (community default per core-team RFC
     leanprover/lean4#4106; all our lakefile needs are declarative;
     `lake translate-config` makes reversal one command)
-- [ ] Add Batteries dependency (or record core-only decision); commit `lake-manifest.json`
+  - pinned v4.32.2; `lib.toml` template. Scaffold also dropped
+    `.github/workflows/lean_action_ci.yml` and an empty `lake-manifest.json`,
+    both committed as generated — the CI item below rewrites the workflow.
+  - `Ledger/Basic.lean` is scaffold placeholder; `Ledger/Core.lean` replaces it
+- [ ] Add Batteries dependency (or record core-only decision); re-commit `lake-manifest.json`
 - [ ] lean.nvim in nvim config (lives in dotfiles repo — breadcrumb only here)
   - verify: infoview shows goals in a scratch theorem; `\forall` → `∀` abbreviation works
 - [ ] CI: `.github/workflows/ci.yml` with `leanprover/lean-action@v1` (`build-args: "--wfail"`); push, verify green on origin
