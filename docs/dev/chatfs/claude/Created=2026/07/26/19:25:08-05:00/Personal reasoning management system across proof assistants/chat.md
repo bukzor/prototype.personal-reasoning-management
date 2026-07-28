@@ -31,8 +31,8 @@ Claim ledger:
 ## L0 — Process
 
 * TURN_SCARCITY: Counterparty turns are the scarce resource; assistant computation is not — authority: assistant
-* TRADE: Assistant trades provisional stipulations for turns, never the reverse — authority: user
-* NOTICER ← DESIGN_FIAT, STIP, TRADE: Authority over an underdetermined choice is acquired by noticing it; the noticer stipulates immediately
+* TRADE!: Assistant trades provisional stipulations for turns, never the reverse — authority: user
+* NOTICER ← DESIGN_FIAT, STIP, TRADE!: Authority over an underdetermined choice is acquired by noticing it; the noticer stipulates immediately
 * NO_RESIDUE ← NOTICER, TURN_SCARCITY: A turn is complete only when all self-answerable residue is closed; legitimate residue is exclusively counterparty-unique information
 * LAST_WINS: Ledger amendment rule: claim set = union over the conversation, last wins
 * PROVISIONAL ← NOTICER, LAST_WINS: Noticer-stipulated choices carry a provisional tag; revocation is any later stipulation on the same subject
@@ -51,32 +51,32 @@ Claim ledger:
 
 * STATUS ← VERDICT: A claim's status is the set of authorities of accepted verdicts about it; the shallow/described/proof depth ladder is a special case
 * HASH_ID: Claim identity is a content hash of the statement (surface text ⊕ formal content where the host distinguishes it); names are mutable pointers; staleness = a dependent proven against a superseded hash
-* TRUST_BASE ← HYP_FIAT, VERDICT: Trust base = the claim's hypothesis telescope ∪ host-environment boundary axioms ∪ ledger verdict authorities; the first component is kernel-enforced
-* STALE_PROP ← HYP_FIAT, HASH_ID: Stipulation revision propagates staleness automatically, since hypotheses are statement content
+* TRUST_BASE ← HYP_FIAT!, VERDICT: Trust base = the claim's hypothesis telescope ∪ host-environment boundary axioms ∪ ledger verdict authorities; the first component is kernel-enforced
+* STALE_PROP ← HYP_FIAT!, HASH_ID: Stipulation revision propagates staleness automatically, since hypotheses are statement content
 
 ## L3 — Architecture
 
 * HOST_DB: "Claim S has status P" is always encodable as further host declarations; the host environment is already a persistent claim database
-* DELEGATE: All proving is delegated to the host engine; the system never evaluates entailment — authority: user
+* DELEGATE!: All proving is delegated to the host engine; the system never evaluates entailment — authority: user
 * FIAT_FORMS ← STIP: Stipulations admit two host encodings — global (environment-level fiat) and hypothetical (context-level: telescopes, sections, locales, frames); hypothetical fiat makes TRUST_BASE kernel-visible in the claim itself
-* HYP_FIAT ← FIAT_FORMS, HASH_ID: Hypothetical fiat is the sole encoding for ledger-authored stipulations, all substrates; host-library global axioms are boundary conditions in TRUST_BASE, out of scope — authority: user
-* LEDGER_BESIDE ← DELEGATE, HOST_DB, HASH_ID: The system is a ledger beside the engine: persistent claim-keyed bookkeeping over host declarations
+* HYP_FIAT! ← FIAT_FORMS, HASH_ID: Hypothetical fiat is the sole encoding for ledger-authored stipulations, all substrates; host-library global axioms are boundary conditions in TRUST_BASE, out of scope — authority: user
+* LEDGER_BESIDE ← DELEGATE!, HOST_DB, HASH_ID: The system is a ledger beside the engine: persistent claim-keyed bookkeeping over host declarations
 * ENC_CHOICE ← HOST_DB: An unforced encoding choice selects which experiment runs; it must be explicit and recorded with an author
 
 ## L4 — Command surface
 
 * CMD_SURFACE ← LEDGER_BESIDE, DESIGN_FIAT: The fixed cross-substrate object is an abstract command surface — claim / describe / stipulate / assert / warrant / status / stale — instantiated via each host's extension or embedding mechanism
-* VERB_TARGETS ← HYP_FIAT: Verb targets: shallow → ledger-only; described → statement object; stipulate → telescope extension (Lean bundled structures, Isabelle locales, Agda module parameters, Metamath `$e`-frames or antecedent form, ACL2 `encapsulate`); assert → warrant-application term submitted to the kernel; proven → host theorem
+* VERB_TARGETS ← HYP_FIAT!: Verb targets: shallow → ledger-only; described → statement object; stipulate → telescope extension (Lean bundled structures, Isabelle locales, Agda module parameters, Metamath `$e`-frames or antecedent form, ACL2 `encapsulate`); assert → warrant-application term submitted to the kernel; proven → host theorem
 * NO_AXIOMS ← CHECKER, VERDICT: Verdict-claims live in the ledger only, never as host axioms
-* V1_CHECKERS ← CHECKER, DELEGATE: v1 checkers = host kernel + staleness scanner; TRUST_BASE delegates to native assumption tracking where present
+* V1_CHECKERS ← CHECKER, DELEGATE!: v1 checkers = host kernel + staleness scanner; TRUST_BASE delegates to native assumption tracking where present
 * NO_SIDECAR ← LEDGER_BESIDE: Persistence is host-native state, no external sidecar in v1
 
 ## L5 — Experiment
 
-* PROCURE: Purpose is procurement — selecting a daily substrate for the user's own reasoning system — authority: user
-* CORPUS: The claim corpus is DTPL metatheory and verified implementation — authority: user
-* UNDOMINATED ← PROCURE: Candidate-set membership = undominated ∧ prima facie viable; dominated arms buy no procurement information
-* ARM_SET ← UNDOMINATED, CORPUS: v1 arms = {Lean4, Isabelle/HOL, Metamath, Agda, ACL2}; Rocq excluded as dominated
+* PROCURE!: Purpose is procurement — selecting a daily substrate for the user's own reasoning system — authority: user
+* CORPUS!: The claim corpus is DTPL metatheory and verified implementation — authority: user
+* UNDOMINATED ← PROCURE!: Candidate-set membership = undominated ∧ prima facie viable; dominated arms buy no procurement information
+* ARM_SET ← UNDOMINATED, CORPUS!: v1 arms = {Lean4, Isabelle/HOL, Metamath, Agda, ACL2}; Rocq excluded as dominated
 * AXES ← CMD_SURFACE, ENC_CHOICE: Comparison axes: native absorption of CMD_SURFACE; meta-language identity (self- vs foreign-meta); native-twin density; proof relevance; telescope-composition ergonomics
 * FREEZE_GATE ← AXES: CMD_SURFACE freeze gate: desk-check all verbs against out-of-set corners (currently F\*) before freezing
 * V2_SHORTLIST: v2 shortlist = {F\*}; {Rocq} contingent on revoking its dominance claim
@@ -106,12 +106,12 @@ Three original commitments: claim-centrality, the stipulate/assert dichotomy, an
 * **OK_CLAIMS_ONLY**: Claim-centrality survives fully. CLAIMS_ONLY, and the decision in WARRANT/VERDICT to make warrants and verdicts *claims* rather than new node types, is the strongest structural idea in the ledger — it's what keeps the graph homogeneous.
 * **OK_ASSERT**: "Proven exactly to the extent its requirements are proven" is genuinely honored by the telescope encoding (HYP_FIAT/TRUST_BASE): undischarged requirements persist as hypotheses on the host theorem, so "extent" is literally the discharged subset, kernel-checked. This is the right mechanization of your sentence.
 * **FIAT_SHIFT**: HYP_FIAT quietly changes the semantics of STIP. Original: a stipulation is "proven by fiat." Under HYP_FIAT, a ledger stipulation is *never* proven in the host — it's only assumable; every downstream claim is conditional on it. Provenness-by-fiat becomes a ledger-level status (VERDICT), not a host fact. This is a divergence in letter and an improvement in substance — global axioms are trust poison, hypothetical fiat keeps TRUST_BASE kernel-visible — but it should be recorded as a deliberate reinterpretation, not passed off as the same claim.
-* **DEPTH_REPAIR**: STATUS and VERB_TARGETS assign depth to different bearers, and the reconciling claim is missing. STATUS says depth is a special case of *verdict-authority sets* (epistemic standing). VERB_TARGETS says depth maps to *artifact classes* (ledger row → statement object → theorem). A claim can be described with zero verdicts, which falsifies STATUS as written. The repair is one claim: depth-verdicts attest artifact existence — shallow = no verdict, described = elaborator/parser verdict on the statement object, proof = kernel verdict. With that claim added, STATUS becomes sound and VERB_TARGETS becomes its host projection. Without it, L2 and L4 disagree about what depth *is*.
+* **DEPTH_REPAIR?**: STATUS and VERB_TARGETS assign depth to different bearers, and the reconciling claim is missing. STATUS says depth is a special case of *verdict-authority sets* (epistemic standing). VERB_TARGETS says depth maps to *artifact classes* (ledger row → statement object → theorem). A claim can be described with zero verdicts, which falsifies STATUS as written. The repair is one claim: depth-verdicts attest artifact existence — shallow = no verdict, described = elaborator/parser verdict on the statement object, proof = kernel verdict. With that claim added, STATUS becomes sound and VERB_TARGETS becomes its host projection. Without it, L2 and L4 disagree about what depth *is*.
 
 ## Internal consistency
 
 * **STRAT_BREAK**: The stratification claim in your closing prose is false as stated. Three arrows point upward: NOTICER (L0) ← DESIGN_FIAT (L1); TRUST_BASE (L2) ← HYP_FIAT (L3); STALE_PROP (L2) ← HYP_FIAT (L3). Fix: split HYP_FIAT into a content claim — "hypotheses are part of statement content" — which is substrate-free and belongs in L2 (call it HYP_CONTENT; TRUST_BASE and STALE_PROP then consume HYP_CONTENT), leaving the encoding commitment (hypothetical-fiat-only, sole encoding) in L3. For NOTICER, either re-base it on STIP directly (DESIGN_FIAT ← STIP anyway, and NOTICER's justification is an analogy to DESIGN_FIAT, not an entailment from it) or accept that DESIGN_FIAT is a process claim mislabeled as ontology.
-* **ARROWS**: The ← arrows are themselves shallow claims. Most are "motivated by," not entailments — NOTICER ← DESIGN_FIAT is an analogy, BUILD_ORDER ← TURN_SCARCITY is a heuristic. Fine for an informal ledger, but by your own depth ladder every arrow is currently at depth-shallow, and the ledger nowhere says whether arrows are ever meant to climb the ladder. Worth one claim settling it (I'd stipulate: arrows are permanently informal; the formal graph lives in the host).
+* **ARROWS?**: The ← arrows are themselves shallow claims. Most are "motivated by," not entailments — NOTICER ← DESIGN_FIAT is an analogy, BUILD_ORDER ← TURN_SCARCITY is a heuristic. Fine for an informal ledger, but by your own depth ladder every arrow is currently at depth-shallow, and the ledger nowhere says whether arrows are ever meant to climb the ladder. Worth one claim settling it (I'd stipulate: arrows are permanently informal; the formal graph lives in the host).
 * **DANGLING_REF**: WARRANT "subsumes WARRANT_NODE," but WARRANT_NODE appears nowhere in the presented union. Under LAST_WINS the union spans the whole conversation, so this may be fine in your full history, but the artifact as shown isn't self-contained. Same for DTPL in CORPUS.
 * **FOUR_V_FIVE**: Your prose says four substrates; ARM_SET says five arms (ACL2 in, Rocq out). Internally LAST_WINS resolves this — last wins, ARM_SET carries authority — but the message contradicts its own framing. One of them is stale.
 
@@ -167,7 +167,7 @@ Assessment per arm, against your four criteria: CLI, syntax, CI, snappiness. The
 
 * **PLEASURE_RANK**: Only Lean4 can satisfy all four criteria simultaneously, because CMD_SURFACE embeds as native syntax and inherits the LSP; every other arm bolts CMD_SURFACE on from outside. Ranking for daily pleasure: **Lean4 > Metamath > Isabelle > ACL2 > Agda** — Agda last despite the best editor loop, because your criteria weight CLI/CI, which are its two worst surfaces.
 * **SPLIT**: The deeper finding is that "pleasure" decomposes along the LEDGER_BESIDE seam: *ledger* pleasure (status, stale, verdicts, CI) is maximized by Metamath by an order of magnitude; *authoring* pleasure is maximized by Lean4 (with Isabelle's sledgehammer as the automation counterweight). No single arm maximizes both.
-* **HYBRID**: Which is an argument the ledger doesn't yet contain: the procurement question (PROCURE) may not have a single-substrate answer. A Lean4-authoring / Metamath-or-Dedukti-checking split — promote DEDUKTI — is the configuration that would actually feel good end-to-end. Recorded as a hypothesis for the experiment to falsify, not a reason to skip it: BUILD_ORDER stands, and the Lean4 arm remains the correct first build.
+* **HYBRID?**: Which is an argument the ledger doesn't yet contain: the procurement question (PROCURE) may not have a single-substrate answer. A Lean4-authoring / Metamath-or-Dedukti-checking split — promote DEDUKTI — is the configuration that would actually feel good end-to-end. Recorded as a hypothesis for the experiment to falsify, not a reason to skip it: BUILD_ORDER stands, and the Lean4 arm remains the correct first build.
 
 # [092 · human · 2026-07-26T21:54](messages/2026-07-26T21:54:43,597510000-0500.human.019fa17e-fa2f-75c0-a16d-60abacc35e52.md)
 
@@ -197,9 +197,9 @@ Yes — and this isn't speculation; the load-bearing fact is that the experiment
 
 ## What I'd actually build, in order
 
-* **T1_ADOPT — adopt, ~days**: Trial MM1/mm0-rs as the authoring surface directly. Cost: it's a dialect, not `.mm` — you'd rely on translation for anything set.mm-shaped, and you inherit a research tool's bus factor. But it answers "could this be pleasant" empirically before you write a line.
-* **T2_WRAP — wrap, ~2–3 weeks**: A `metamath-knife`-based LSP + CLI giving instant diagnostics, hover (show the assertion + its frame), goto-definition, and mmj2-style unify-on-hole as a code action. No new syntax; raw `.mm` stays the storage format, which keeps HASH_ID's canonical-hashing property intact. This alone moves Metamath authoring from "parallel universe" to "austere but responsive," and the CLI half is work the ledger (LEDGER_BESIDE/CMD_SURFACE) needs regardless — it double-counts.
-* **T3_SURFACE — surface syntax, ~3 person-months**: A thin declarative front-end (named hypotheses, infix notation, holes, a small fixed tactic set: MP-chaining, rewriting, definition unfolding) elaborating to `.mm` proof trees. Feasible *because of* TRIVIAL_CHECK/GRAMMAR_AUTO — the elaborator's target is dumb and the checker is instant. Three months is my point estimate for a solo competent dev leveraging metamath-knife; the risk is not feasibility but permanent solo-maintenance of a proof language, which is the same maintenance class as custom Lean elab commands (my earlier Lean4 churn warning), just with a stabler substrate underneath.
+* **T1_ADOPT? — adopt, ~days**: Trial MM1/mm0-rs as the authoring surface directly. Cost: it's a dialect, not `.mm` — you'd rely on translation for anything set.mm-shaped, and you inherit a research tool's bus factor. But it answers "could this be pleasant" empirically before you write a line.
+* **T2_WRAP? — wrap, ~2–3 weeks**: A `metamath-knife`-based LSP + CLI giving instant diagnostics, hover (show the assertion + its frame), goto-definition, and mmj2-style unify-on-hole as a code action. No new syntax; raw `.mm` stays the storage format, which keeps HASH_ID's canonical-hashing property intact. This alone moves Metamath authoring from "parallel universe" to "austere but responsive," and the CLI half is work the ledger (LEDGER_BESIDE/CMD_SURFACE) needs regardless — it double-counts.
+* **T3_SURFACE? — surface syntax, ~3 person-months**: A thin declarative front-end (named hypotheses, infix notation, holes, a small fixed tactic set: MP-chaining, rewriting, definition unfolding) elaborating to `.mm` proof trees. Feasible *because of* TRIVIAL_CHECK/GRAMMAR_AUTO — the elaborator's target is dumb and the checker is instant. Three months is my point estimate for a solo competent dev leveraging metamath-knife; the risk is not feasibility but permanent solo-maintenance of a proof language, which is the same maintenance class as custom Lean elab commands (my earlier Lean4 churn warning), just with a stabler substrate underneath.
 
 ## The strategic catch
 
@@ -225,7 +225,7 @@ This is the right topology, and — important — your ledger's ontology already
 ## Why the architecture is sound
 
 * **HUB**: The hub in a hub-and-spoke proof architecture should be the *dumbest, most stable* node: simplest logic, canonical concrete syntax, fastest checking, best hashing. That's Metamath on every axis — it's the HASH_ID stability winner and the TRIVIAL_CHECK winner from earlier turns. Elaborate at the periphery, store at the trunk. This is also the correct resolution of SPLIT: authoring pleasure gets outsourced to satellites per-claim, ledger pleasure stays home.
-* **IMPORT_FITS** ← NO_AXIOMS, VERDICT, CHECKER: An imported certification is *exactly* a verdict-claim in your existing ontology. "Lean's kernel accepted a proof of the image of claim X" enters the ledger as a stipulated claim with authority = {Lean-kernel-version, translator-version, alignment-map}. NO_AXIOMS already mandates that verdicts never become host axioms, so foreign certifications never contaminate the Metamath database — they live beside it, ledger-only. You designed this slot before you knew what would fill it.
+* **IMPORT_FITS** ← NO_AXIOMS, VERDICT!, CHECKER: An imported certification is *exactly* a verdict-claim in your existing ontology. "Lean's kernel accepted a proof of the image of claim X" enters the ledger as a stipulated claim with authority = {Lean-kernel-version, translator-version, alignment-map}. NO_AXIOMS already mandates that verdicts never become host axioms, so foreign certifications never contaminate the Metamath database — they live beside it, ledger-only. You designed this slot before you knew what would fill it.
 * **TRUST_SWAP** ← TRUST_BASE: The precise payoff of Dedukti, stated as trust-base arithmetic: without it, a satellite verdict's authority includes the foreign kernel ("we trust Lean's checker"). With Dedukti re-checking the exported proof, the foreign *kernel drops out of TRUST_BASE* and is replaced by {Dedukti checker + logic encoding + translator}. Since the Dedukti checker is small and the encodings are published rewrite theories, this is a strict trust improvement — that's the whole value proposition, and it's real.
 
 ## The problem Dedukti does not solve
@@ -246,9 +246,9 @@ Translator maturity is wildly uneven, and it determines which satellites exist *
 
 ## Build order
 
-* **B1_BARE**: Ship verdict-import *without* Dedukti first — ledger-level VERDICT verdicts with authority "foreign kernel + hand-checked statement correspondence." Zero new infrastructure; the architecture supports it today; you start accumulating real alignment maps immediately, which is the data you need anyway.
-* **B2_RECHECK**: Add Dedukti as re-checker on the industrialized spokes only (ATP, HOL Light) to cash the TRUST_SWAP trust reduction where the tooling is real.
-* **B3_LEAN**: Lean4 spoke when a credible translator exists; alignment maps from B1_BARE carry over.
+* **B1_BARE?**: Ship verdict-import *without* Dedukti first — ledger-level VERDICT verdicts with authority "foreign kernel + hand-checked statement correspondence." Zero new infrastructure; the architecture supports it today; you start accumulating real alignment maps immediately, which is the data you need anyway.
+* **B2_RECHECK?**: Add Dedukti as re-checker on the industrialized spokes only (ATP, HOL Light) to cash the TRUST_SWAP trust reduction where the tooling is real.
+* **B3_LEAN?**: Lean4 spoke when a credible translator exists; alignment maps from B1_BARE carry over.
 
 ## Conclusion
 
@@ -281,15 +281,15 @@ Then the design inverts cleanly, and it's worth stating what the inverted system
 
 ## What you pay, priced honestly
 
-* **HASH_COST** ← HASH_ID: Hashing and staleness get materially harder. Statement identity under elaboration is version-unstable (instances, universe metavariables, `Nat` literals desugaring). Mitigation exists — hash the *pre-elaboration* syntax tree plus a normal-form check via `whnf` — but it's engineering you own, and cross-version hash stability is genuinely unsolvable at the term level; you'll re-baseline on toolchain bumps. Point estimate: a workable intra-version scheme is ~2 weeks; cross-version is "accept re-verification on upgrade."
+* **HASH_COST** ← HASH_ID?: Hashing and staleness get materially harder. Statement identity under elaboration is version-unstable (instances, universe metavariables, `Nat` literals desugaring). Mitigation exists — hash the *pre-elaboration* syntax tree plus a normal-form check via `whnf` — but it's engineering you own, and cross-version hash stability is genuinely unsolvable at the term level; you'll re-baseline on toolchain bumps. Point estimate: a workable intra-version scheme is ~2 weeks; cross-version is "accept re-verification on upgrade."
 * **CHURN**: The toolchain moves monthly and breaks metaprograms with some regularity. Your CMD_SURFACE elab commands, environment extensions, and widgets are exactly the API surface that churns. Budget a real number: ~2–4 days per quarter of pure maintenance, indefinitely, more in quarters where the elaborator internals shift. This is the rent. Metamath's rent was zero; that was its entire pitch.
 * **TRUST_COST** ← TRUST_SWAP: The trust base grows and you stop being able to shrink it. Kernel is respectable (small, multiple external checkers exist), but your verdict-computing metaprograms run in the *elaborator*, not the kernel — a bug in your status machinery can misreport, even though it can't fake a proof. The TRUST_SWAP move from last turn (swap big kernel out for Dedukti) is unavailable; lean4export/lean4checker is the partial substitute. If your threat model is "I might fool myself with my own tooling," note that the all-in design puts your tooling *inside* the thing being audited.
 * **PERF**: Elaboration latency is real but overrated as a cost *for your workload*: a ledger corpus of thousands of small claims with light mathlib dependence builds in minutes cold, seconds incremental, and `lake exe cache` handles CI. You are not mathlib. This cost is the one people warn about and the one that matters least here.
 
 ## What happens to the rest of the ledger
 
-* **EXPT_COLLAPSE** ← EXPT_REFRAME: The experiment collapses rather than reframes. Under the UX-maximal utility function, ARM_SET's arms aren't rival hubs *or* needed satellites — they're dead weight. UNDOMINATED's own logic ("dominated arms buy no procurement information") now eliminates everything but Lean4; the honest move is to declare the procurement question answered and downgrade the experiment to a calibration exercise or cancel it. BUILD_ORDER reduces to its first element.
-* **AUDIT_SPOKE**: Keep exactly one spoke, pointed backward: a lean4export → external-checker pass in CI (lean4checker today; a Dedukti or MM0 target if the translators mature) as an *archival/audit* channel, not a workflow component. This caps TRUST_COST at "kernel + export tool" for the claims you care most about, costs one CI job, and preserves an exit ramp if Lean's churn ever exceeds your tolerance. DEDUKTI demotes back to deferred; the B1_BARE–B3_LEAN sequence dissolves.
+* **EXPT_COLLAPSE?** ← EXPT_REFRAME: The experiment collapses rather than reframes. Under the UX-maximal utility function, ARM_SET's arms aren't rival hubs *or* needed satellites — they're dead weight. UNDOMINATED's own logic ("dominated arms buy no procurement information") now eliminates everything but Lean4; the honest move is to declare the procurement question answered and downgrade the experiment to a calibration exercise or cancel it. BUILD_ORDER reduces to its first element.
+* **AUDIT_SPOKE?**: Keep exactly one spoke, pointed backward: a lean4export → external-checker pass in CI (lean4checker today; a Dedukti or MM0 target if the translators mature) as an *archival/audit* channel, not a workflow component. This caps TRUST_COST at "kernel + export tool" for the claims you care most about, costs one CI job, and preserves an exit ramp if Lean's churn ever exceeds your tolerance. DEDUKTI demotes back to deferred; the B1_BARE–B3_LEAN sequence dissolves.
 
 ## Conclusion
 
