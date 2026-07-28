@@ -22,7 +22,7 @@ discourse kbs run on it.
   utility — each defaulting to full so an uncontested claim costs nothing,
   recorded per party with party keys as source refs. SOURCE! and DEGREE!
   are this scheme designed a second time; the ledger arrived at the same
-  shape from VERDICT! instead of from frontmatter.
+  shape from VERDICT instead of from frontmatter.
 - Non-destructive contestation: `mkdir $CLAIM.kb/` opens a sub-scope
   under a settled claim — challenge is an act beside the text, never a
   rewrite, so contesting costs and destroys nothing. DEFEAT's

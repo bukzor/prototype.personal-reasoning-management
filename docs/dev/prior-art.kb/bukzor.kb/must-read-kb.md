@@ -24,11 +24,11 @@ mandates-with-authority running today, on convention alone.
 the act, so no law can see compliance — the gap
 `../../user-stories.kb/the-corpus-binds-my-agents.md` marked, now
 answered by residue-as-verdict (SOURCE!). And triggers live in surface
-layout (path segments) — the loss TRIGGER_CONTENT+ repairs: condition
+layout (path segments) — the loss TRIGGER_CONTENT repairs: condition
 as claim content, path as its projection.
 
 **Informs:** LAW (laws need acts visible), NOTICE_LIMIT,
-TRIGGER_CONTENT+;
+TRIGGER_CONTENT;
 `../../user-stories.kb/the-right-claims-find-me.md`,
 `../../user-stories.kb/the-corpus-binds-my-agents.md`,
 `../../user-stories.kb/legislate-against-my-failure-modes.md`.

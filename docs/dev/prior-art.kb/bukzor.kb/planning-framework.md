@@ -17,7 +17,7 @@ answers, decided by requirements (boolean disqualifiers) then criteria
 - Dominance recorded, not just scored: an alternative dies with the
   reason on file, and sensitivity is a query — which weight change
   flips the decision.
-- V004 keys reopening to a named premise (REOPEN+'s shape, found
+- V004 keys reopening to a named premise (REOPEN's shape, found
   early), and R001 names its judge ("Mom is very clear") —
   NAME_THE_JUDGE! in the wild.
 

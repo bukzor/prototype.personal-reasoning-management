@@ -7,7 +7,7 @@ already function this way, and this repo's own `conduct` theory is
 nothing but obligations on agents. The system must let me state such
 claims and *check compliance*, not merely archive the rules.
 
-**Served by:** AUTHOR_ACTS!, NAME_THE_JUDGE!, PROVISIONAL, SOURCE!,
+**Served by:** AUTHOR_ACTS, NAME_THE_JUDGE!, PROVISIONAL, SOURCE!,
 MONOTONE, PROJECTION — the mandated residue of an agent's act is a
 verdict: source, degree, date, judged hash. REFLECT_LIMIT bounds laws to
 the graph, so compliance is phrased over that residue, and laws over it
