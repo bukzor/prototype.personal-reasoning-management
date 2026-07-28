@@ -9,12 +9,11 @@ revision, and the system must know the difference.
 
 **Served by:** HASH_ID (identity is content, so pure re-housing changes
 nothing), SURFACE_SPLIT, UNTRUSTED_XLATE (the round-trip is the
-migration's correctness check: same value in, same value out).
-
-> [!QUESTION] what does the content hash quotient out?
-> If the hash covers surface incidentals — formatting, file location,
-> frontmatter ordering — every corpus-wide migration re-baselines every
-> claim: mass identity churn, verdicts orphaned, the record poisoned by
-> a rename. HASH_ID's "identity is content" needs a stated quotient:
-> what counts as content, what is incident. Settles in `ledger`
-> (HASH_ID sharpened) and `host` (HASH_FORMAL's hashing surface).
+migration's correctness check: same value in, same value out),
+QUOTIENT! (the quotient is stated: mechanical only — encoding,
+trailing whitespace, wrap — so formatting churn within it is free),
+ID_BOUNDARY! + HASH_RENDER (file location, frontmatter ordering,
+labels, and arrows sit outside the statement entirely — re-housing and
+renaming touch no hash), EQUIV_CLAIM! (a migration that must reword
+statements asserts sameness as ordinary claims — the migration
+script's residue, consumable by scoped normalization laws).

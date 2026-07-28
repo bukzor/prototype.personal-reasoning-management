@@ -10,12 +10,8 @@ rotted. The system must serve both disciplines without me choosing one.
 
 **Served by:** the last-wins convention plus git as the revision log
 (references), HASH_ID (a record's identity is its content — any edit is
-detectably a different claim), NAME_REUSE+.
-
-> [!QUESTION] does the value know which genre a claim is?
-> "Records never revise" is exactly the shape of a law — but only if
-> genre is claim data. If it stays directory convention, the law is
-> unstateable and a falsified record is invisible to the engine.
-> Settles in `ledger` (genre as standing-adjacent data, or deliberately
-> convention-only) — a cheap field, and the first law it buys is one my
-> practice already wants.
+detectably a different claim), NAME_REUSE+, GENERIC_BASE! (genre is
+neither a base field nor mere directory convention but the third
+thing: application content shape — a records application marks the
+record shape as content, and "records never revise" is its law,
+stateable above the line and fully visible to the engine).

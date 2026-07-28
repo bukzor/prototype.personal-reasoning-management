@@ -16,14 +16,19 @@ lifecycle and the right properties: defeat assertions are themselves
 defeasible, authored, and contestable — which a hardcoded structural
 edge could not be. So representation is free.
 
-The open question is operational: the sketch's status machinery computes
-from structural facts; a defeat claim is inert to it until recognized
-and propagated. Sub-questions for when design opens:
+Answered in the design ledger (`../../design.ledger.kb/ledger.md`:
+DEFEAT, LINK_CLAIM!, PROJECTION, UNFORCED!). Defeat needs no
+recognition step because it needs no propagation step:
 
-- What makes defeat claims machine-recognizable?
-- Claimed vs computed status: the sketch makes staleness *computed*
-  (trustworthy) while defeat would be *claimed* (human judgment) —
-  the machinery's job is propagating claimed defeat into computed
-  status. Same axis for priority orderings.
-- Defeat-of-defeat: once defeat claims are defeasible, adjudication
-  needs a fixpoint semantics — relocated by reification, not dissolved.
+- Machine-recognizable: a rebuttal *is* a contrary-degree verdict on
+  the target claim, an undercut the same on the support-step claim —
+  structured evidence the engine reads natively. The argued defeat
+  exists as an ordinary claim besides; asserting it issues the verdict.
+- Claimed vs computed: verdicts are the record; every standing readout
+  is a projection computed from them (PROJECTION). Propagating claimed
+  defeat into computed status is query-time computation, permitted
+  under any semantics (UNFORCED!) while the record itself never rules
+  (ACCEPTED).
+- Defeat-of-defeat: an undercut on a defeat's own support step is the
+  same mechanism one level up; fixpoint semantics are readings —
+  computable, never forced.
