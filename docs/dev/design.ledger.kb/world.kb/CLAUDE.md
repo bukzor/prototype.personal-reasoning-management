@@ -1,8 +1,8 @@
 # Substrate assessments — maintenance
 
 One file per substrate the procurement question weighed, plus any transport
-considered alongside them. The evidence behind `L5-substrate.md`'s claim lines
-lives here; the claim lines stay authoritative.
+considered alongside them. The evidence behind `world.md`'s claim lines lives
+here; the claim lines stay authoritative.
 
 ## What belongs here
 
@@ -17,7 +17,7 @@ lives here; the claim lines stay authoritative.
 ## What does not
 
 - **Claim lines.** A finding that other claims cite as a premise is a line in
-  `../L5-substrate.md`, labelled. This file gives its evidence.
+  `../world.md`, labelled. This file gives its evidence.
 - **Toolchain facts we depend on** (does `lake` do X, is mathlib pinned) —
   `../../initial-setup.discourse.kb/`. That graph is about the toolchain we
   use; these files are about substrates we chose between.

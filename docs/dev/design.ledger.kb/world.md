@@ -1,29 +1,28 @@
-# L5 — Substrate
+# world
 
-Disposable configuration: why the system is being built at all, on what corpus,
-and on which substrate. The procurement question is closed (`DECISION`); what
-survives here is the answer, its price, and the pole that lost.
+Named things: which engines exist, what they cost, and which one was chosen.
+Disposable by design — the procurement question is closed (`DECISION`), and
+what survives is the answer, its price, and the pole that lost.
 
-- PROCURE!: Purpose is procurement — selecting a daily substrate for the user's own reasoning system -- authority: user
-- CORPUS!: The claim corpus is dependently-typed-programming-language (DTPL) metatheory and verified implementation -- authority: user
-- DAILY_CRITERIA! <- PROCURE!: The utility function is daily pleasure of use — snappy CLI, clean syntax, easy and fast CI, general snappiness -- authority: user
-- UNDOMINATED <- PROCURE!: Candidate-set membership = undominated ∧ prima facie viable; dominated arms buy no procurement information
+- `prior:` host
+- `ontology:` proper names — Lean4, mathlib, Batteries, Metamath, set.mm,
+  MM0/MM1, metamath-knife, Dedukti/Lambdapi, Isabelle, ACL2, Agda — and version
+  numbers
+- `defeated by:` any of them changing — a release, a rewrite, a project dying
+
 - PLEASURE_RANK <- DAILY_CRITERIA!, CMD_SURFACE: Only Lean4 satisfies all of DAILY_CRITERIA, because it absorbs CMD_SURFACE as native syntax and inherits the LSP; ranking is Lean4 > Metamath > Isabelle > ACL2 > Agda
 - DAILY_LOOP <- DAILY_CRITERIA!, NATIVE!: The Lean4 loop is the best available in interactive theorem proving — sub-second incremental feedback, LSP hover/goto/completion on the ledger's own verbs for free, `exact?`/`simp`/`aesop`/`duper`, InfoView widgets for claim-graph rendering; a fully-built bespoke Metamath surface's ceiling is roughly Lean's floor
 - ECOSYSTEM <- CORPUS!: Lean4 is where DTPL metatheory is currently done at scale, so for CORPUS the best-suited system was going to be Lean regardless; mathlib, Batteries, doc-gen and `lake` CI templates come with it
-- ALIGNMENT <- STIP, STALE_PROP: Cross-substrate statement alignment is hand-authored and permanent — one stipulation per concept per pair, forever, each with an author, revisable and staleness-propagating. It is the largest recurring cost in any multi-substrate design, and a single-substrate design deletes it outright
 - CHURN <- NATIVE!: The rent on NATIVE is toolchain churn — the elaborator API is exactly the surface that moves, and `elab` commands, environment extensions and widgets ride on it; budget 2-4 days per quarter of maintenance, indefinitely. Metamath's rent was zero, which was its entire pitch
 - PERF <- CORPUS!: Elaboration latency is the cost most warned about and the one that matters least here — a corpus of thousands of small claims with light mathlib dependence is minutes cold, seconds incremental, and `lake exe cache` covers CI
 - TRIVIAL_CHECK: Metamath verification is trivial by design — direct substitution, no unification-modulo-reduction, no elaboration in the kernel — so any authoring tool gets a millisecond-latency oracle for proof correctness
-- GRAMMAR_AUTO <- TRIVIAL_CHECK: The grammatical layer is mechanically solvable — roughly a third of set.mm-style proof steps are grammar, unambiguously parseable and auto-derived since mmj2 — leaving the logical layer as the only real authoring problem
-- UNIFY_ASSIST: The logical layer admits cheap assistance: unify a partial proof with work variables against the database — decidable, fast, fifteen-year-old technology
 - MM1_EXISTS: MM0/MM1 is already "own surface syntax + custom LSP over a Metamath-class kernel", built by the person who knows Metamath's internals best — both a design validation and a possible adoption target
 - KNIFE: metamath-knife is library-shaped, incremental and parallel, explicitly built to support language-server use — the engine for a custom LSP exists as a crate
-- LIB_LEVERAGE <- CORPUS!: set.mm's ~40k theorems are what offset Metamath's authoring cost; a bespoke surface keeps them only by round-tripping set.mm conventions, which then leak upward into it — weakened by building an own library either way, not eliminated
-- MM_IMPROVABLE <- TRIVIAL_CHECK, MM1_EXISTS, KNIFE: Metamath authoring is improvable to genuinely pleasant — trivial verification makes it the easiest substrate in the set to tool, and MM0/MM1 proves the full design works; the cost is permanently maintaining a proof language solo (see L5-substrate.kb/metamath.md)
+- MM_IMPROVABLE <- TRIVIAL_CHECK, MM1_EXISTS, KNIFE: Metamath authoring is improvable to genuinely pleasant — trivial verification makes it the easiest substrate in the set to tool, and MM0/MM1 proves the full design works; the cost is permanently maintaining a proof language solo (see `world.kb/metamath.md`)
 - BUS_FACTOR: The Dedukti translator ecosystem is research software — small team, student-project translators, bit-rot — which is why any design making it load-bearing carries systemic risk
-- DEDUKTI? <- AUDIT_SPOKE, BUS_FACTOR: Dedukti/Lambdapi is deferred, not load-bearing: a possible future AUDIT_SPOKE target alongside MM0 if the Lean4 translators mature (see L5-substrate.kb/dedukti-spine.md)
+- DEDUKTI? <- AUDIT_SPOKE, BUS_FACTOR: Dedukti/Lambdapi is deferred, not load-bearing: a possible future AUDIT_SPOKE target alongside MM0 if the Lean4 translators mature (see `world.kb/dedukti-spine.md`)
 - TWO_POLES <- MM_IMPROVABLE, PLEASURE_RANK, ALIGNMENT: There are exactly two poles and no third. Metamath-trunk = own everything, rent nothing — zero churn, canonical hashing, minimal trust, UX built by hand to a ceiling of responsive austerity. Lean4-native = rent the best tooling in the field — claims as first-class objects, ledger derived from ground truth, inherited LSP and automation — paying perpetual maintenance rent, fuzzy identity, and a larger trust base. Every hybrid between them buys ALIGNMENT back
 - DECISION! <- TWO_POLES, DAILY_LOOP, CHURN: The decision variable is time horizon over maintenance tolerance, not taste: a system that must still verify untouched in 2036 is dominated by Metamath's zero-rent property; a system that earns its keep by daily use over the next three years is dominated by Lean4's UX compounding. For a daily-driver personal system with a sole maintainer, UX compounding beats the rent — all-in Lean4, with AUDIT_SPOKE as the hedge -- authority: user
-- SELF_HOST! <- DECISION!, CORPUS!: The first corpus is this ledger itself — port L0-L2 before any DTPL content, so the verb ergonomics get shaken out on claims whose content is already settled -- authority: user
+- LEAN_REALIZE+ <- DECISION!, HASH_FORMAL, FRAME_BUNDLE+, CMD_SURFACE, NO_SIDECAR: Every `host` commitment's Lean4 realization, collected in one place so `host` stays substrate-free. Hashing: the pre-elaboration `Syntax` tree. Frames: a `structure`, threaded explicitly, because bare `variable` sections do not compose across imports. Verbs: `elab` commands in `Lean.Elab.Command`, so the LSP serves them like any other syntax — `stipulate` yields a `structure Frame`, `assert` a `theorem c (f : Frame) : Q`. Queries: `#trustbase` is `collectAxioms` over the frame's fields; `#stale` is also `lake exe scan` for CI. Persistence: a `PersistentEnvExtension` keyed by claim hash, riding in the `.olean`s. Audit: lean4export + lean4checker (see `world.kb/lean4-native.md`)
+- SELF_HOST! <- DECISION!, CORPUS!: The first corpus is this ledger itself — port the prior theories (`stance`, `ledger`, `conduct`, `convention`) before any DTPL content, so the verb ergonomics get shaken out on claims whose content is already settled -- authority: user
 - EXPT_COLLAPSE <- DECISION!, UNDOMINATED: The multi-arm experiment collapses rather than reframes — under DECISION, UNDOMINATED's own logic eliminates every arm but Lean4, so there is no arm set, no comparison axes, no build order and no freeze gate against foreign substrates. Lean4 is not arm one of five; it is the system

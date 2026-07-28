@@ -57,7 +57,7 @@ Corpus/                -- the actual claims, one module per topic
 3. Environment extension + `claim`/`#status` — the shallow-only vertical slice, end to end (1–2 days).
 4. `describe` + hashing + `#stale` (2 days).
 5. `stipulate`/`assert` with frame bundles + dependency extraction via proof-term walk (3–4 days).
-6. Port L0–L2 of the actual ledger as the first corpus — the system describes itself; this shakes out the verb ergonomics before DTPL content arrives.
+6. Port the prior theories of the actual ledger (`stance`, `ledger`, `conduct`, `convention`) as the first corpus — the system describes itself; this shakes out the verb ergonomics before DTPL content arrives.
 7. `#trustbase`, widget rendering, `duper`/`exact?` integration notes — after daily use begins, not before.
 
 **Known hazards to encode as comments now**: syntax-tree hashing re-baselines on toolchain bumps (accept re-verification, don't fight it); elab API churn lands in `Cmds.lean` — keep it thin, logic in `Core`/`Scan`; never let a verdict become an `axiom` (VL).

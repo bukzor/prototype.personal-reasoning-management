@@ -13,7 +13,7 @@ A framework for defeasible claims and their mandates/authority/proofs,
 built in Lean 4.
 
 - Design rationale, in prose: `docs/dev/design-sketch.md`
-- Design ledger — the labelled claims the design commits to, by level:
+- Design ledger — the labelled claims the design commits to, by theory:
   `docs/dev/design.ledger.md`
 - Setup discourse — questions and claims about the toolchain:
   `docs/dev/initial-setup.discourse.kb/`
