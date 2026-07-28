@@ -30,10 +30,10 @@ Claim ledger:
 
 ## L0 — Process
 
-* TURN_SCARCITY: Counterparty turns are the scarce resource; assistant computation is not — authority: assistant
+* TURN_SCARCITY+: Counterparty turns are the scarce resource; assistant computation is not — authority: assistant
 * TRADE!: Assistant trades provisional stipulations for turns, never the reverse — authority: user
 * NOTICER ← DESIGN_FIAT, STIP, TRADE!: Authority over an underdetermined choice is acquired by noticing it; the noticer stipulates immediately
-* NO_RESIDUE ← NOTICER, TURN_SCARCITY: A turn is complete only when all self-answerable residue is closed; legitimate residue is exclusively counterparty-unique information
+* NO_RESIDUE ← NOTICER, TURN_SCARCITY+: A turn is complete only when all self-answerable residue is closed; legitimate residue is exclusively counterparty-unique information
 * LAST_WINS: Ledger amendment rule: claim set = union over the conversation, last wins
 * PROVISIONAL ← NOTICER, LAST_WINS: Noticer-stipulated choices carry a provisional tag; revocation is any later stipulation on the same subject
 
@@ -81,7 +81,7 @@ Claim ledger:
 * FREEZE_GATE ← AXES: CMD_SURFACE freeze gate: desk-check all verbs against out-of-set corners (currently F\*) before freezing
 * V2_SHORTLIST: v2 shortlist = {F\*}; {Rocq} contingent on revoking its dominance claim
 * DEDUKTI ← CHECKER: Dedukti/Lambdapi recorded as candidate shared spine for cross-substrate hashing; deferred
-* BUILD_ORDER ← TURN_SCARCITY: Build order Lean4 → Metamath → Agda → Isabelle → ACL2
+* BUILD_ORDER ← TURN_SCARCITY+: Build order Lean4 → Metamath → Agda → Isabelle → ACL2
 
 ---
 
