@@ -24,7 +24,11 @@ Setup spine (each item ≈ one small commit; sequenced so each verifies the prev
     Batteries-only datum and tactic. Nothing under `Ledger/` imports it yet.
 - [ ] lean.nvim in nvim config (lives in dotfiles repo — breadcrumb only here)
   - verify: infoview shows goals in a scratch theorem; `\forall` → `∀` abbreviation works
-- [ ] CI: `.github/workflows/ci.yml` with `leanprover/lean-action@v1` (`build-args: "--wfail"`); push, verify green on origin
+- [~] CI: `.github/workflows/ci.yml` with `leanprover/lean-action@v1` (`build-args: "--wfail"`); push, verify green on origin
+  - scaffold's `lean_action_ci.yml` renamed; `--wfail` verified locally
+  - also turned on `leanchecker: true` now rather than at the AUDIT_SPOKE
+    item — the action bundles the checker for toolchains ≥ v4.28.0-rc1, so
+    the hedge costs one line today instead of a build step later
 - [ ] Test skeleton: `Test/` module + `testDriver` in lakefile; one trivial `#guard` + one runtime assertion; `lake test` green locally and in CI
 - [ ] Lint skeleton: Batteries `@[lint_driver]`; `lake lint` green locally and in CI
 - [x] README + license — Apache-2.0 by reference to the canonical online
@@ -40,9 +44,14 @@ Framework build order (from `docs/dev/design-sketch.md`; vertical slice first �
       `Corpus/Generated.lean` (committed, diffable)
 - [ ] `Ledger/Laws.lean`: `WellFormed` + `theorem corpus_ok := by decide` — vertical slice end to end over one kb file
 - [ ] `Gen/Print.lean`: `lake exe roundtrip` + CI diff check — the generator is untrusted
-- [ ] lean4export + lean4checker external-audit CI step over `Corpus/` — the
-      fourth CI step, and spine decision #5's only hedge against all-in Lean
-      (`AUDIT_SPOKE`), so it is committed work, not a might-never
+- [ ] External audit over `Corpus/` — the fourth CI step, and spine decision
+      #5's only hedge against all-in Lean (`AUDIT_SPOKE`), so it is committed
+      work, not a might-never. `leanchecker: true` is already on; what remains
+      is deciding whether that is enough. It re-checks with Lean's own kernel
+      code, so it cannot catch a kernel bug — `lean-action`'s `nanoda: true`
+      (independent Rust type checker, `nanoda-allow-sorry: false`) is the
+      genuinely independent re-check, at the cost of a Rust toolchain in CI.
+      Revisit once `Corpus/` is real enough that the run time is measurable.
 - [ ] Depth artifacts: `stmt : Prop` attachment (described), `pf : stmt` bundling (proven); staleness conjunct in `WellFormed`
 - [ ] `Corpus/Frames.lean`: `stipulate` frames, generated alongside the rows
       (hypothesis bundles, never `axiom`)

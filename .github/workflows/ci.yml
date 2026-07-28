@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+        with:
+          # A warning is a defect we have not named yet. Fail on it while the
+          # corpus is small enough that fixing one is cheap.
+          build-args: "--wfail"
+          # AUDIT_SPOKE: re-check the built environment with a checker that is
+          # not the elaborator. Bundled with the toolchain since v4.28.0-rc1,
+          # so this costs a flag, not a build.
+          leanchecker: true
