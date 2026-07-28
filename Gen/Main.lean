@@ -1,5 +1,6 @@
 import Ledger.Core
 import Ledger.Hash
+import Gen.Common
 
 /-! # `lake exe gen` -- corpus/ frontmatter to `Corpus/Generated.lean`
 
@@ -34,10 +35,6 @@ structure Entry where
   /-- Judgment date for the authority's verdict, ISO 8601. -/
   date : Option String := none
 
-/-- Fail with the offending file in the message. -/
-def fail (path : FilePath) (msg : String) : IO α :=
-  throw <| IO.userError s!"{path}: {msg}"
-
 /-- A label must be a plain Lean identifier: no escaping in the emitter. -/
 def validLabel (s : String) : Bool :=
   !s.isEmpty && !s.front.isDigit
@@ -64,15 +61,8 @@ def parseFlowList (path : FilePath) (value : String) : IO (List String) := do
 /-- Parse the frontmatter block of one corpus file into an `Entry`. Body
 text below the closing `---` is kb prose, not record. -/
 def parseFile (path : FilePath) : IO Entry := do
-  let contents ← IO.FS.readFile path
-  let lines := contents.splitOn "\n"
-  match lines with
-  | first :: rest =>
-    unless first.trimAscii.copy.startsWith "---" do
-      fail path "no frontmatter: first line must open with ---"
-    let block := rest.takeWhile (fun l => l.trimAscii.copy ≠ "---")
-    unless rest.length > block.length do
-      fail path "unterminated frontmatter: no closing ---"
+    let contents ← IO.FS.readFile path
+    let block ← frontmatterLines path contents
     let mut entry : Entry :=
       { path, label := "", text := "" }
     for line in block do
@@ -99,16 +89,6 @@ def parseFile (path : FilePath) : IO Entry := do
     | some other => fail path s!"unsupported authority: {other}"
     | none => pure ()
     pure entry
-  | [] => fail path "empty file"
-
-/-- All corpus claim files, sorted so output is deterministic. -/
-def corpusFiles (root : FilePath) : IO (Array FilePath) := do
-  let paths ← root.walkDir
-  let files := paths.filter fun p =>
-    p.extension == some "md"
-      && p.fileName != some "CLAUDE.md"
-      && (p.parent.map (·.toString.endsWith ".kb")).getD false
-  pure <| files.qsort (·.toString < ·.toString)
 
 /-- Render a `UInt64` as padded hex, matching how humans cite hashes. -/
 def hex (n : UInt64) : String :=

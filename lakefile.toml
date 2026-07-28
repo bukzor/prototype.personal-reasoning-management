@@ -32,6 +32,18 @@ root = "Test.Main"
 name = "Corpus"
 globs = ["Corpus.+"]
 
+# Not a defaultTarget; the lib exists so the exes' in-package imports get
+# built (same gotcha as Test).
+[[lean_lib]]
+name = "Gen"
+globs = ["Gen.+"]
+
 [[lean_exe]]
 name = "gen"
 root = "Gen.Main"
+
+# The round-trip audit (UNTRUSTED_XLATE): prints the compiled value back to
+# canonical frontmatter and byte-compares the authored surface.
+[[lean_exe]]
+name = "roundtrip"
+root = "Gen.Print"

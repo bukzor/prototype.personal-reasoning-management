@@ -116,7 +116,20 @@ Framework build order (from `docs/dev/design-sketch.md`; vertical slice first �
     `LEAST_FIX`'s arrow resolves
   - negative case verified: a dangling premise makes `decide` refute
     `WellFormed` and the build dies in `Ledger.Laws`
-- [ ] `Gen/Print.lean`: `lake exe roundtrip` + CI diff check — the generator is untrusted
+- [x] `Gen/Print.lean`: `lake exe roundtrip` + CI diff check — the generator is untrusted
+  - the printer maps the *compiled* value back to canonical frontmatter
+    and byte-compares the authored surface; no parser reuse, so a parser
+    bug can't cancel itself out. Rows pair with files positionally via
+    the one sorted traversal (`Gen/Common.lean`)
+  - byte-compare doubles as canonical-form enforcement: bare `---`, key
+    order claim/authority/date/premises/text, no blank lines
+  - CI grew the two `UNTRUSTED_XLATE` steps: `gen` + `git diff
+    --exit-code` (committed record = what the corpus generates) and
+    `roundtrip` (record = what was authored)
+  - negative case verified: tampering the generated date (invisible to
+    every law) fails roundtrip; `lake exe gen` restores
+  - not-yet-printable, by design: non-user sources, multiple verdicts,
+    stale evidence — the printer refuses rather than inventing a surface
 - [ ] External audit over `Corpus/` — the fourth CI step, and spine decision
       #5's only hedge against all-in Lean (`AUDIT_SPOKE`), so it is committed
       work, not a might-never. `leanchecker: true` is already on; what remains

@@ -20,3 +20,11 @@ jobs:
           # not the elaborator. Bundled with the toolchain since v4.28.0-rc1,
           # so this costs a flag, not a build.
           leanchecker: true
+      # UNTRUSTED_XLATE, both directions. Regenerate and demand a clean tree:
+      # the committed record is exactly what the corpus generates. Then print
+      # the compiled value back to canonical frontmatter and byte-compare the
+      # authored surface: the record states exactly what was authored.
+      - name: generated record is committed
+        run: lake exe gen && git diff --exit-code .
+      - name: round-trip
+        run: lake exe roundtrip
