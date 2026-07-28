@@ -8,14 +8,15 @@ revision teaches me to stop revising, which defeats the defeasibility
 premise entirely.
 
 **Served by:** LAW (the staleness scanner is the first law), FIAT_SHIFT,
-STATUS.
+STATUS, PROJECTION (staleness is a projection over hash-attached
+verdicts, and acknowledgement is a fresh verdict at the current hash —
+degree repriceable — so acknowledged debt is representable, not a new
+mechanism).
 
 > [!QUESTION] is staleness build-failure or acknowledged debt?
-> As specified, staleness is a conjunct of `WellFormed`, so the build fails
-> while anything is stale — right for CI, wrong for the daily loop: one
-> honest revision makes the corpus red for a week, and validation taxing
-> the daily loop is exactly what INFER! forbids. The demand is a
-> law of the form "no *unacknowledged* staleness": an acknowledged-stale
-> standing that keeps the build green while the debt stays visible and
-> enumerable. Settles as a ledger claim (likely `ledger`-theory standing
-> plus a `host` realization).
+> Mechanism settled by PROJECTION; what remains is only policy: whether
+> `WellFormed` keeps a staleness conjunct (build red while stale) or
+> demands no *unacknowledged* staleness while `#stale` merely reports —
+> one honest revision must not make the corpus red for a week, and
+> validation taxing the daily loop is exactly what INFER! forbids.
+> Settles in `host` (LAW / V1_CHECKERS+).

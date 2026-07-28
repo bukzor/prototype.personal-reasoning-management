@@ -17,6 +17,12 @@ discourse kbs run on it.
 - The path-resolution ADR: plain file-relative paths superseded clever
   lexical scoping — simplicity won a migration, worth remembering
   when designing claim identity.
+- The unified-claim-scheme design (`docs/dev/design/unified-claim-scheme/`
+  in the skill repo): validity as three Habermas axes — truth, certainty,
+  utility — each defaulting to full so an uncontested claim costs nothing,
+  recorded per party with party keys as source refs. SOURCE! and DEGREE!
+  are this scheme designed a second time; the ledger arrived at the same
+  shape from VERDICT! instead of from frontmatter.
 
 **Miss:** edges are typed but walked only by eye — corrected and
 improved incidentally as agent and operator browse, with existence the
@@ -26,6 +32,7 @@ ladder row for repo weight. And five node types where the ledger needs one:
 the other four are librarianship riding in the ontology, exactly what
 `CLAIMS_ONLY!` deletes.
 
-**Informs:** CLAIMS_ONLY!, STALE_PROP (by its absence), SPAN!;
+**Informs:** CLAIMS_ONLY!, STALE_PROP (by its absence), SPAN!, SOURCE!,
+DEGREE!;
 `../../user-stories.kb/records-and-references-coexist.md`,
 `../../user-stories.kb/revise-and-live-with-fallout.md`.

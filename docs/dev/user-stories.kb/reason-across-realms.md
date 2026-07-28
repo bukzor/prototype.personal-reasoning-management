@@ -7,14 +7,9 @@ premises, authority, staleness, laws — must apply to them undiminished,
 or the system covers only the realm that needed it least.
 
 **Served by:** CORPUS! (the corpus is all realms; DTPL is merely first),
-DEPTH_ATTEST (stated depth is first-class).
-
-> [!QUESTION] does ClaimMeta carry likelihood?
-> My live practice already writes `likelihood: 0.8` in discourse-kb
-> frontmatter; the sketched ClaimMeta has no such field. Either
-> uncertainty enters the value (and laws can bound it) or we rule
-> deliberately that standing is discrete — silence is the wrong state.
-> Settles as a `ledger`-theory claim either way.
+DEPTH_ATTEST (stated depth is first-class), DEGREE! (uncertainty enters
+the value as the certainty axis of a verdict's degree — `likelihood: 0.8`
+is a source's judgment recorded, and laws can bound it).
 
 > [!QUESTION] are defeat edges in the value?
 > Real defeasible reasoning has rebuttal and undercutting, not only
