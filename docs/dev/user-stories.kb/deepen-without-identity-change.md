@@ -6,4 +6,5 @@ consumer citing it are undisturbed: deepening appends an artifact, never
 migrates the claim.
 
 **Served by:** SPAN! (this is its continuum), HASH_ID, DEPTH_ATTEST,
-MONOTONE.
+MONOTONE, ID_BOUNDARY! (a proof is validity support, outside identity
+by ruling).

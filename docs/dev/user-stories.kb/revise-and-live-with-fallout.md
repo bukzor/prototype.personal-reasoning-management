@@ -15,4 +15,6 @@ mechanism), UNFORCED! (re-adjudicating *over days, at my own pace* is
 exactly the deferral entitlement it names), STALE_ACK+ (well-formedness
 demands only that staleness be *acknowledged* — an honest revision
 reddens the build until its fallout has been seen, not for the week of
-re-adjudication).
+re-adjudication), QUOTIENT! (what counts as a revision at all: only
+edits the mechanical quotient can't absorb strand verdicts, so
+reflowing prose is free and rewording is priced honestly).
