@@ -2,7 +2,9 @@
 
 One file per substrate the procurement question weighed, plus any transport
 considered alongside them. The evidence behind `world.md`'s claim lines lives
-here; the claim lines stay authoritative.
+here; the claim lines stay authoritative. One exception to the shape:
+`lean-realize.kb/` holds the chosen substrate's realization detail, one facet
+per file (its own CLAUDE.md governs it).
 
 ## What belongs here
 
