@@ -22,7 +22,7 @@ Setup spine (each item ≈ one small commit; sequenced so each verifies the prev
   - pinned `rev = "v4.32.0"` (the tag matching `lean-toolchain`), not `main`
   - verified out of tree: `trash/batteries-smoke.lean` elaborates a
     Batteries-only datum and tactic. Nothing under `Ledger/` imports it yet.
-- [ ] lean.nvim in nvim config (lives in dotfiles repo — breadcrumb only here)
+- [x] lean.nvim in nvim config (lives in dotfiles repo — breadcrumb only here; done, dotfiles 9ae3729)
   - verify: infoview shows goals in a scratch theorem; `\forall` → `∀` abbreviation works
 - [x] CI: `.github/workflows/ci.yml` with `leanprover/lean-action@v1` (`build-args: "--wfail"`); push, verify green on origin
   - scaffold's `lean_action_ci.yml` renamed; `--wfail` verified locally
