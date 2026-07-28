@@ -4,7 +4,7 @@
 for standing (bare / `?` / `+` / `!`), `<-` premise arrows, one-line
 governance (`claim accept: X`), theories over fixed ontologies when the
 ledger outgrows one list. The direct ancestor of this project's
-notation: roughly seven claims are the same commitment on both sides
+notation: thirteen claims are the same commitment on both sides
 (`../../design.ledger.md` names them), and the invariant — every claim
 sound, open, or retracted — is the RN axiom every rung realizes.
 

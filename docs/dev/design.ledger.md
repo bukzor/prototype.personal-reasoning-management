@@ -50,16 +50,13 @@ Nothing in `stance` or `convention` is specific to this project, and the
 medium-independent form of both is carried in `Skill(llm-claim-ledger)`,
 whose `design.ledger.kb/` is itself a ledger in theories: `stance.kb/` and
 `purpose.kb/` for what the notation is for, `good-smells.kb/` for the
-criteria, `notation.kb/` for the decisions. Seven claims are the same
+criteria, `notation.kb/` for the decisions. Thirteen claims are the same
 commitment on both sides and **carry the same label on both sides**, so
 the correspondence is a grep rather than a table: `REGRESS_ACT`,
 `AUTHOR_ACTS`, `PARSIMONY`, `ARROWS`, `IMAGE`, `LEAST_FIX`,
-`CLAIMS_ONLY`. Stated there for any claim notation, here for this one.
-
-Four more are the same commitment under different labels — alignment
-debt rather than independent claims: its `STIPULATION` is `STIP` +
-`WARRANT!`, its `OUTLIVES` is `SELF_CONTAINED!` + `FRESH_READER+`, its
-`FIAT` is `PROVISIONAL`, and its `INVARIANT` is `TRICHOTOMY+`. The rest
+`CLAIMS_ONLY`, `STIP`, `WARRANT`, `SELF_CONTAINED`, `FRESH_READER`,
+`PROVISIONAL`, `TRICHOTOMY`. Stated there for any claim notation, here
+for this one. The rest
 do not correspond and are not meant to: `ledger` is this project's rung
 and has no counterpart there, `good-smells` is the skill's and has none
 here, and the two `purpose` theories share only a name (`NAME_REUSE+`).
@@ -67,10 +64,7 @@ here, and the two `purpose` theories share only a name (`NAME_REUSE+`).
 its own claim, since nothing over there cites it.
 
 Neither copy is a pointer to the other: divergence across the overlap is
-the drift check, and a defect in one of the two. One standing asymmetry
-is on record: `CLAIMS_ONLY` is certified here (review 089) and fiat
-there — not content drift, but the discharge belongs on the skill's
-side.
+the drift check, and a defect in one of the two.
 
 ## Reading and amending
 
