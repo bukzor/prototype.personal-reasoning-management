@@ -43,7 +43,14 @@ Setup spine (each item ≈ one small commit; sequenced so each verifies the prev
     get its in-package imports built (`Test/Basic.olean does not exist`).
   - both assertions read `hello` from the scaffold `Ledger/Basic.lean`;
     re-point them when `Ledger/Core.lean` replaces it
-- [ ] Lint skeleton: Batteries `@[lint_driver]`; `lake lint` green locally and in CI
+- [~] Lint skeleton: Batteries `@[lint_driver]`; `lake lint` green locally and in CI
+  - `lintDriver = "batteries/runLinter"` — no driver of ours to maintain; it
+    resolves the root modules of our `defaultTargets` by itself
+  - it earned its keep on first run: `docBlame` caught the scaffold `hello`
+    with no docstring. So the negative case needed no staging.
+  - gotcha: `runLinter` builds a module only when its olean is *missing*, not
+    when it is stale, so `lake lint` alone can report against an old build.
+    Run `lake build` first. CI is safe — lean-action builds before linting.
 - [x] README + license — Apache-2.0 by reference to the canonical online
       copy (user's call, 2026-07-28); note GitHub's license auto-detection
       wants the full text and won't badge a by-reference LICENSE

@@ -2,6 +2,9 @@ name = "Ledger"
 version = "0.1.0"
 defaultTargets = ["Ledger"]
 testDriver = "test"
+# Batteries ships the driver; it auto-detects the root modules of our default
+# targets, so there is nothing of ours to maintain.
+lintDriver = "batteries/runLinter"
 
 # Pinned to the tag matching lean-toolchain, not `main`: the manifest is the
 # record, and a floating rev makes every fetch a fresh trust decision.
