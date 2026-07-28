@@ -1,7 +1,9 @@
 # Metamath
 
 Maximal on every ledger criterion and minimal on authoring. The split in `SPLIT`
-is essentially this file.
+is essentially this file. Under `HUB` it is the trunk: the properties that make
+it a poor daily driver — no elaboration, canonical syntax, a kernel that only
+substitutes — are exactly the properties a hub wants.
 
 ## Against DAILY_CRITERIA
 

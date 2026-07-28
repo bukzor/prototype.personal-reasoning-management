@@ -9,5 +9,6 @@ commitment (`HYP_FIAT`); everything above it is substrate-free by construction.
 - HYP_FIAT <- FIAT_FORMS, HYP_CONTENT: Hypothetical fiat is the sole encoding for ledger-authored stipulations, all substrates; host-library global axioms are boundary conditions in TRUST_BASE, out of scope -- authority: user
 - FIAT_SHIFT <- HYP_FIAT, VERDICT: A ledger stipulation is never proven in the host, only assumable — provenness-by-fiat is a ledger status, not a host fact; recorded as a deliberate reinterpretation of "proven by fiat"
 - HASH_FORMAL <- HASH_ID: Hashing formal content is a per-substrate commitment, made here; L2 identity stays surface-only
+- TRUST_SWAP <- TRUST_BASE: Re-checking an exported proof drops the foreign kernel out of the trust base, replacing it with {re-checker + logic encoding + translator}; since that checker is small and the encodings are published, it is a strict trust improvement
 - LEDGER_BESIDE <- DELEGATE, HOST_DB, HASH_ID: The system is a ledger beside the engine: persistent claim-keyed bookkeeping over host declarations
 - ENC_CHOICE <- HOST_DB: An unforced encoding choice selects which experiment runs; it must be explicit and recorded with an author
