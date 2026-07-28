@@ -46,6 +46,15 @@ theory. Where it appears to, the prior theory was wrong and gets fixed there.
 `world` is meant to be thrown away and `host` to be frozen; `stance`, `ledger`
 and `convention` should survive any substrate change.
 
+Nothing in `stance` or `convention` is specific to this project, and the
+medium-independent form of both is carried in `Skill(llm-claim-ledger)`,
+whose `design.kb/` is itself a ledger in theories: `stance.kb/` and
+`purpose.kb/` for what the notation is for, `good-smells.kb/` for the
+criteria, `notation.kb/` for the decisions. The two copies are the same
+commitments at different fidelity: divergence between them is a defect in
+one of the two, and the copies here are the ones that may cite `ledger`
+vocabulary.
+
 ## Reading and amending
 
 Claim set = union over the theories, **last wins**. Revise a claim by
