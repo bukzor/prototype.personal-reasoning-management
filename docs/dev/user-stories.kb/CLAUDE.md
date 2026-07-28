@@ -3,7 +3,8 @@
 One story per file: a concrete workflow, first person, that the finished
 system must make true. The set spans authoring (capture, deepen, revise),
 consumption (interrogate = pull, the-right-claims-find-me = push,
-the-corpus-binds-my-agents = obligation), and stewardship (migrate,
+the-corpus-binds-my-agents = obligation,
+the-system-tells-me-what-i-didnt-say = inference), and stewardship (migrate,
 records-vs-references, durability) — a design that serves only the
 authoring stories has built a notebook, not a reasoning system. Stories are demands, not commitments — the
 commitments live in `../design.ledger.kb/`; a story cites the claim labels

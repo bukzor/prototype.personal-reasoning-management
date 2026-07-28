@@ -10,6 +10,6 @@ hand. Any workflow this system serves worse than the bare skill is a
 failure. What the skill cannot give — and this system must — is
 machine-checked structure over stated claims.
 
-**Served by:** DEPTH_ATTEST (stated depth owes no artifact), LAW, STATUS,
-INTROSPECT. The vertical slice should be judged against this story, not
-against proofs.
+**Served by:** SPAN! (the informal pole must pay its own way), DEPTH_ATTEST
+(stated depth owes no artifact), LAW, STATUS, INTROSPECT. The vertical
+slice should be judged against this story, not against proofs.
