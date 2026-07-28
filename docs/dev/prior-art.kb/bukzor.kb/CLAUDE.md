@@ -11,8 +11,11 @@ plus one addition to the format:
   paid to learn it.
 
 External systems stay in the parent directory. A system belongs here
-only if the user built it and used it; surveys, scrapes, and other
-research artifacts get at most a line in `../bukzor.md`. Add an entry
+only if the user built it and used it — or, by exception, a
+counterfactual the operator ran against the ledger, when its diagnosis
+carries a Miss the way a built system's does
+(`hypothetical-python-prms.md`). Surveys, scrapes, and other research
+artifacts get at most a line in `../bukzor.md`. Add an entry
 when another forgotten near-miss resurfaces — the operator expects
 more — and update `../bukzor.md` when the roster changes.
 

@@ -29,6 +29,13 @@ index) survived years of daily use. `SPAN!`'s informal pole and
 `../user-stories.kb/capture-without-ceremony.md` are that gradient,
 legislated.
 
+One entry is not a near-miss: `bukzor.kb/hypothetical-python-prms.md`,
+a counterfactual run against the ledger (2026-07-28) rather than a
+system lived-in. It stays in the quarry because its diagnosis bears the
+way the misses do — the Python wall sits in `world` (the rented daily
+loop), not `host` (kernels exist in Python) — confirming `DECISION!`
+rests on utility, not feasibility.
+
 Ancestry without entries: `research.llm-knowledge-collaboration` — an
 LLM-conducted stack survey whose outcome was building `llm-kb` rather
 than adopting anything it scored; `prototype.chatfs` and

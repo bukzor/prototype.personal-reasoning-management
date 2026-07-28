@@ -70,6 +70,11 @@ Please read and consider slotting them.
       and bears its current sigil. Manual grep today (done twice by hand,
       2026-07-28); a `WellFormed` conjunct once the translator ingests
       prose mentions. Sigil flips then surface every stale citation.
+- [ ] Pre-Lean projection tool over `docs/dev/design.ledger.kb/` — small
+      Python: hash statements, derive sigils, staleness + well-formedness
+      checks; its parser/hasher is the translator's front half, reusable.
+      Frontier and rationale:
+      `docs/dev/prior-art.kb/bukzor.kb/hypothetical-python-prms.md`
 - [ ] doc-gen4 API docs → GitHub Pages from CI
 - [ ] InfoView claim-graph widget (`Ledger/Widget.lean`)
 - [ ] Revisit autoformatting if the official formatter ships (leanprover/lean4#369)
