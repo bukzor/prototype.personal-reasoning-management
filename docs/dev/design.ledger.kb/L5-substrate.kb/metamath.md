@@ -1,9 +1,10 @@
-# Metamath
+# Metamath — the pole that lost
 
-Maximal on every ledger criterion and minimal on authoring. The split in `SPLIT`
-is essentially this file. Under `HUB` it is the trunk: the properties that make
-it a poor daily driver — no elaboration, canonical syntax, a kernel that only
-substitutes — are exactly the properties a hub wants.
+Maximal on every ledger criterion and minimal on authoring. `TWO_POLES` is
+essentially this file against `lean4-native.md`, and `DECISION` went the other
+way. Kept because a rejected candidate's file is the record of what the decision
+cost, and because the exit ramp runs back through here if `CHURN` ever exceeds
+tolerance.
 
 ## Against DAILY_CRITERIA
 
@@ -11,7 +12,7 @@ substitutes — are exactly the properties a hub wants.
   set.mm (~40k theorems) in low single-digit seconds; a ledger corpus verifies in
   milliseconds.
 - **CI**: `cargo install metamath-knife` plus one command. No heaps, no caches,
-  no toolchain pinning.
+  no toolchain pinning. This is the zero-rent property `TWO_POLES` names.
 - **CLI**: native tools are austere, but everything is text and everything is
   instant, so a thin wrapper of our own would feel telepathic. The best possible
   substrate for the ledger operations themselves — status, stale, verdict
@@ -21,16 +22,19 @@ substitutes — are exactly the properties a hub wants.
   proofs, not bookkeeping, and writing real proofs in raw Metamath is a
   discipline. `MM_IMPROVABLE` is the claim that this is fixable, below.
 
-## Against AXES
+## What it gets right that Lean4 does not
 
 Plain-text database, so `NO_SIDECAR` persistence and `HASH_ID` are trivially
 stable — concrete syntax *is* canonical here, which is exactly what
-`HASH_FORMAL` cannot promise elsewhere.
+`HASH_FORMAL` cannot promise under Lean4, where the hash re-baselines on
+toolchain bumps.
 
-`MM_DESCRIBE` is the one place the command surface bends: an unproven assertion
-is `$a`, which asserts, so `described` has to be encoded as a wff whose
-grammar-parse is itself a proof. That parse is a genuine elaborator verdict, so
-it satisfies `DEPTH_ATTEST` rather than working around it.
+The command surface bends in one place: an unproven assertion is `$a`, which
+asserts, so `described` has to be encoded as a wff whose grammar-parse is itself
+a proof. That parse is a genuine elaborator verdict, so it satisfies
+`DEPTH_ATTEST` rather than working around it. Under `NATIVE` the question does
+not arise — but it was the cheapest available falsification test for
+`CMD_SURFACE`'s substrate-independence, and that test is now unrun.
 
 ## Why the authoring floor is raisable
 
@@ -56,14 +60,14 @@ exists:
 - metamath-lamp is evidence of demand and a UX reference (web-based,
   hole-oriented), but not the architecture to copy.
 
-Ladder: `T1_ADOPT` to calibrate, `T2_WRAP` unconditionally since its CLI half is
-ledger work anyway, `T3_SURFACE` only if the experiment survives that far. The
-risk in `T3_SURFACE` is not feasibility — it is permanently maintaining a proof
-language solo, the same maintenance class as custom Lean `elab` commands, over a
-stabler substrate.
+The ladder, had this pole won: adopt MM1/mm0-rs directly to calibrate (~days);
+a metamath-knife LSP and CLI (~2-3 weeks); a declarative front-end with holes
+and a small fixed tactic set elaborating to `.mm` proof trees (~3 person-months).
+The risk was never feasibility — it was permanently maintaining a proof language
+solo, which is the same maintenance class as `CHURN` but over a stabler
+substrate.
 
 `LIB_LEVERAGE` is the strategic catch: set.mm is the asset that offsets the
 authoring cost, and a bespoke surface keeps it only by honoring set.mm's
 conventions — deduction style, the wff/class discipline — which then leak into
 the "clean" syntax.
-

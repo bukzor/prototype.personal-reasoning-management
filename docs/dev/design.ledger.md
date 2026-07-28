@@ -1,5 +1,5 @@
 ---
-last-updated: 2026-07-27
+last-updated: 2026-07-28
 ---
 
 # Design ledger
@@ -20,9 +20,9 @@ it cites the design and the design cites it.
 | L0 | Process — how the discourse itself is conducted | orthogonal |
 | L1 | Ontology — what a claim is | yes |
 | L2 | Derived structure — status, identity, trust, staleness | yes |
-| L3 | Architecture — the host-encoding commitments | one commitment |
+| L3 | Architecture — the host-encoding commitments | no |
 | L4 | Command surface — the intended-frozen cross-substrate object | yes |
-| L5 | Experiment — disposable configuration | no |
+| L5 | Substrate — disposable configuration | no |
 
 L5 is meant to be thrown away; L4 is meant to be frozen; L0–L2 should survive
 any substrate change.
