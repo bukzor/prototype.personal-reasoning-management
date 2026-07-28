@@ -72,8 +72,20 @@ Framework build order (from `docs/dev/design-sketch.md`; vertical slice first �
     `DecidableEq` through every core type in the kernel — the same
     reduction path `Laws.lean`'s `by decide` will take — and `Main`
     re-checks equality/inequality at runtime
-- [ ] Content hash: formal over the pre-elaboration `Syntax` tree; informal over
+- [x] Content hash: formal over the pre-elaboration `Syntax` tree; informal over
       the text after the mechanical quotient (encoding, trailing whitespace, wrap)
+  - `Ledger/Hash.lean`: `ContentHash.ofText` / `.ofSyntax` / `.quotient`
+  - hash is FNV-1a 64 over Unicode codepoints, specced ours — the
+    toolchain's `hash` is internal, and borrowing it would re-baseline
+    *informal* hashes on Lean bumps, which only `HASH_FORMAL` prices in
+  - quotient: per-line `trimAscii` (kills trailing ws, wrap indent, CR),
+    empty lines dropped, joined with single spaces; internal whitespace
+    stays identity. No NFC/NFD — that's `EQUIV_CLAIM!` territory
+  - `ofSyntax` skips `SourceInfo`, mixes constructor tags, hashes idents
+    as written (pre-resolution); `partial`, so runtime-tested in
+    `Test/Main`, not `#guard`
+  - toolchain note: v4.32 String API returns slices/iterators — `splitOn`
+    and `.trimAscii.copy` are the List/String-returning forms
 - [ ] `Gen/Main.lean`: `lake exe gen` — `corpus/**.kb/*.md` frontmatter →
       `Corpus/Generated.lean` (committed, diffable)
 - [ ] `Ledger/Laws.lean`: `WellFormed` + `theorem corpus_ok := by decide` — vertical slice end to end over one kb file

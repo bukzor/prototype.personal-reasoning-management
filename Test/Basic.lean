@@ -21,3 +21,11 @@ def sampleRow : ClaimMeta :=
 /-- A depth artifact bundling its own proof term elaborates and type-checks. -/
 def sampleClaim : Claim :=
   { row := sampleRow, depth := .proven (1 + 1 = 2) (by decide) }
+
+/-! The quotient is mechanical only: trailing whitespace, wrap (with its
+indentation), and line endings vanish; internal whitespace is identity. -/
+
+#guard ContentHash.quotient "  a sample  claim \n  wrapped\r\n\n" = "a sample  claim wrapped"
+#guard ContentHash.ofText "a claim\nwrapped" = ContentHash.ofText "a claim wrapped"
+#guard ContentHash.ofText "a claim" ≠ ContentHash.ofText "a  claim"
+#guard ContentHash.ofText "" = ContentHash.fnvOffset
