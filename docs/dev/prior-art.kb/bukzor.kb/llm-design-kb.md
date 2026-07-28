@@ -20,6 +20,8 @@ convention today.
 detects an entry whose `why:` target was superseded; norms have no
 staleness, so a tower can silently rest on a retracted mission.
 
-**Informs:** DESIGN_FIAT, STIP, STALE_PROP (norms want it too);
+**Informs:** DESIGN_FIAT, STIP, STALE_PROP (norms want it too),
+GENERIC_BASE! (the llm-kb / llm-design-kb separation is its stated
+image: generic substrate below the line, domain vocabulary above);
 `../../user-stories.kb/record-decisions-with-reopeners.md`,
 `../../user-stories.kb/legislate-against-my-failure-modes.md`.

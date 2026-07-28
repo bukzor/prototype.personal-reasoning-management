@@ -9,4 +9,7 @@ itself shows stale, not merely the claims downstream of it.
 rejected-forks-in-line conventions, and REOPEN+ (a reopening condition
 is content on the decision claim, on the ordinary depth ladder — prose
 reopeners are the stated rung, machine-checkable ones the staleness law
-watches; convention versus mechanism was depth all along).
+watches; convention versus mechanism was depth all along), GENERIC_BASE!
+(decision is an application genre: the base supplies content, depth, and
+law machinery; a thin decisions theory supplies the vocabulary and the
+reopener law).
