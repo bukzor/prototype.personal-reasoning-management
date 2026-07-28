@@ -34,7 +34,9 @@ LLM-conducted stack survey whose outcome was building `llm-kb` rather
 than adopting anything it scored; `prototype.chatfs` and
 `llm-chat-librarian` — the provenance flank, turning chat exports into
 citable sources (the design ledger's own provenance line is a chatfs
-path); `llm-vitals` — a consumer of the kb suite, not an ancestor. The
+path); `~/.claude/sessions.kb/` (claude-sessions) — dated session
+records, the family's recurring reinvention of dated-record identity;
+`llm-vitals` — a consumer of the kb suite, not an ancestor. The
 roster is the operator's remembered set plus a sweep of
 `bukzor-agent-skills` and `~/repo/github.com/bukzor`; the operator
 suspects more ("there's more, i forget") — add them as they resurface.

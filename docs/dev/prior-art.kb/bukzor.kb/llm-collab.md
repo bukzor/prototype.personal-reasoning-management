@@ -16,7 +16,9 @@ obtains here: twenty agent sessions a day landing partial work.
 
 **Miss:** all convention, no checker. Supersession is a social pointer;
 nothing fails a build when two ADRs conflict or when code outlives the
-decision that justified it.
+decision that justified it. The suite's own verdict on its devlogs:
+written every session, read approximately never — the record shape this
+family produces without checkers.
 
 **Informs:** LAST_WINS, MONOTONE (supersession-as-pointer, never
 deletion);

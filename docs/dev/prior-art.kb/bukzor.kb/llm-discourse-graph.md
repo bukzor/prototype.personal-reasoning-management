@@ -23,6 +23,10 @@ discourse kbs run on it.
   recorded per party with party keys as source refs. SOURCE! and DEGREE!
   are this scheme designed a second time; the ledger arrived at the same
   shape from VERDICT! instead of from frontmatter.
+- Non-destructive contestation: `mkdir $CLAIM.kb/` opens a sub-scope
+  under a settled claim — challenge is an act beside the text, never a
+  rewrite, so contesting costs and destroys nothing. DEFEAT's
+  contest-as-verdict is the same move with the residue in the value.
 
 **Miss:** edges are typed but walked only by eye — corrected and
 improved incidentally as agent and operator browse, with existence the

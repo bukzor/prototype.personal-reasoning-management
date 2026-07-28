@@ -17,6 +17,10 @@ ingests llm-kb frontmatter (`LEAN_REALIZE+`).
   (`UNTRUSTED_XLATE`'s ingestion point).
 - The maintenance-guide/enumeration split: guides say what belongs,
   `ls` says what's present — the corpus stays cheap to keep honest.
+- migrations.kb/: convention changes shipped as idempotent
+  validate/migrate/rollback scripts, recurring migrations re-run to
+  catch drift — supersession made executable, the existence proof
+  behind `../../user-stories.kb/migrate-conventions-without-loss.md`.
 
 **Miss:** pure librarianship. Naming, discovery, loading, maintenance —
 and no epistemics in the primitive: no warrant, no dependency

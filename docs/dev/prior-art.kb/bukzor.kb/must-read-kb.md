@@ -16,15 +16,19 @@ mandates-with-authority running today, on convention alone.
   `../../user-stories.kb/the-right-claims-find-me.md` already half-runs.
 - `requires:` with named failure semantics — "a skipped `requires:` is
   a documented failure mode" — a mandate that states its consequence.
+- Triggers compose grammatically: `before/git/commit.md` parses as its
+  own firing rule — the path grammar is the query language, and nested
+  scopes come free from directories.
 
 **Miss:** firing is honor-system. No residue proves the read preceded
-the act, so no law can see compliance — exactly the gap
-`../../user-stories.kb/the-corpus-binds-my-agents.md` marks ("what
-residue must acts leave for laws to see them?"). And triggers live in
-surface layout (path segments), leaving the-right-claims-find-me's gap
-— triggers as claim data or as layout? — open.
+the act, so no law can see compliance — the gap
+`../../user-stories.kb/the-corpus-binds-my-agents.md` marked, now
+answered by residue-as-verdict (SOURCE!). And triggers live in surface
+layout (path segments) — the loss TRIGGER_CONTENT+ repairs: condition
+as claim content, path as its projection.
 
-**Informs:** LAW (laws need acts visible), NOTICE_LIMIT;
+**Informs:** LAW (laws need acts visible), NOTICE_LIMIT,
+TRIGGER_CONTENT+;
 `../../user-stories.kb/the-right-claims-find-me.md`,
 `../../user-stories.kb/the-corpus-binds-my-agents.md`,
 `../../user-stories.kb/legislate-against-my-failure-modes.md`.

@@ -23,6 +23,9 @@ history with ACS first.
   above — `CHECKER`'s placement, arrived at independently.
 - Twin degenerate modes: RN without TL is sycophancy; TL without RN is
   a perfectly labeled graveyard.
+- The preservation audit: every redesign classifies each prior
+  capability improves/preserves/obviates, and "silence is not a
+  verdict" — conservativity run as a procedure, not assumed.
 
 **Miss:** reached the hardest rung before the nearest one. ACS's
 deliverables are schematics, not systems; the realm produced a theory

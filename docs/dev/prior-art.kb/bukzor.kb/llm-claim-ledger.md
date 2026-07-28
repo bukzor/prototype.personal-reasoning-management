@@ -17,6 +17,11 @@ sound, open, or retracted — is the RN axiom every rung realizes.
   structure `../../design.ledger.md` reuses wholesale.
 - Warrant-mix at point of use: `XY <- AB! CD?` shows what the claim
   rests on exactly where weight is placed.
+- good-smells.kb/ as an audit battery: standing-visible-at-point-of-use,
+  bare-form-stays-legal, cheaper-to-use-than-to-ignore,
+  survives-dumb-media — each a test any PRMS surface must also pass
+  (the first is an InfoView-hover demand, the second a checkable
+  CMD_SURFACE law).
 
 **Miss:** standing is eyeballed, never computed. No checker runs;
 `certified(CHECK)` names a re-runnable check that nothing re-runs; the
