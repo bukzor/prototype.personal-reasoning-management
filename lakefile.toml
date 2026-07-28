@@ -2,5 +2,12 @@ name = "Ledger"
 version = "0.1.0"
 defaultTargets = ["Ledger"]
 
+# Pinned to the tag matching lean-toolchain, not `main`: the manifest is the
+# record, and a floating rev makes every fetch a fresh trust decision.
+[[require]]
+name = "batteries"
+scope = "leanprover-community"
+rev = "v4.32.0"
+
 [[lean_lib]]
 name = "Ledger"

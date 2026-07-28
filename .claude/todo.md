@@ -14,7 +14,14 @@ Setup spine (each item ≈ one small commit; sequenced so each verifies the prev
     `.github/workflows/lean_action_ci.yml` and an empty `lake-manifest.json`,
     both committed as generated — the CI item below rewrites the workflow.
   - `Ledger/Basic.lean` is scaffold placeholder; `Ledger/Core.lean` replaces it
-- [ ] Add Batteries dependency (or record core-only decision); re-commit `lake-manifest.json`
+- [x] Add Batteries dependency; re-commit `lake-manifest.json`
+  - accepted 2026-07-28 (user's call). The lint item below already
+    presupposes it (`@[lint_driver]` is Batteries', not core), and the
+    trust base stays honest either way — Batteries is `sorry`-free and
+    `#trustbase` computes from `collectAxioms`, never from the manifest.
+  - pinned `rev = "v4.32.0"` (the tag matching `lean-toolchain`), not `main`
+  - verified out of tree: `trash/batteries-smoke.lean` elaborates a
+    Batteries-only datum and tactic. Nothing under `Ledger/` imports it yet.
 - [ ] lean.nvim in nvim config (lives in dotfiles repo — breadcrumb only here)
   - verify: infoview shows goals in a scratch theorem; `\forall` → `∀` abbreviation works
 - [ ] CI: `.github/workflows/ci.yml` with `leanprover/lean-action@v1` (`build-args: "--wfail"`); push, verify green on origin
@@ -33,6 +40,9 @@ Framework build order (from `docs/dev/design-sketch.md`; vertical slice first �
       `Corpus/Generated.lean` (committed, diffable)
 - [ ] `Ledger/Laws.lean`: `WellFormed` + `theorem corpus_ok := by decide` — vertical slice end to end over one kb file
 - [ ] `Gen/Print.lean`: `lake exe roundtrip` + CI diff check — the generator is untrusted
+- [ ] lean4export + lean4checker external-audit CI step over `Corpus/` — the
+      fourth CI step, and spine decision #5's only hedge against all-in Lean
+      (`AUDIT_SPOKE`), so it is committed work, not a might-never
 - [ ] Depth artifacts: `stmt : Prop` attachment (described), `pf : stmt` bundling (proven); staleness conjunct in `WellFormed`
 - [ ] `Corpus/Frames.lean`: `stipulate` frames, generated alongside the rows
       (hypothesis bundles, never `axiom`)
@@ -61,7 +71,6 @@ Please read and consider slotting them.
       2026-07-28); a `WellFormed` conjunct once the translator ingests
       prose mentions. Sigil flips then surface every stale citation.
 - [ ] doc-gen4 API docs → GitHub Pages from CI
-- [ ] lean4export + lean4checker external-audit CI step over `Corpus/`
 - [ ] InfoView claim-graph widget (`Ledger/Widget.lean`)
 - [ ] Revisit autoformatting if the official formatter ships (leanprover/lean4#369)
 - [ ] Reservoir publishing / versioned releases
