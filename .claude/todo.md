@@ -43,7 +43,9 @@ Setup spine (each item ≈ one small commit; sequenced so each verifies the prev
     get its in-package imports built (`Test/Basic.olean does not exist`).
   - both assertions read `hello` from the scaffold `Ledger/Basic.lean`;
     re-point them when `Ledger/Core.lean` replaces it
-- [~] Lint skeleton: Batteries `@[lint_driver]`; `lake lint` green locally and in CI
+- [x] Lint skeleton: Batteries `@[lint_driver]`; `lake lint` green locally and in CI
+  - green in CI at b7de948 ("Linting passed for Ledger"); auto-config again,
+    no workflow edit
   - `lintDriver = "batteries/runLinter"` — no driver of ours to maintain; it
     resolves the root modules of our `defaultTargets` by itself
   - it earned its keep on first run: `docBlame` caught the scaffold `hello`
