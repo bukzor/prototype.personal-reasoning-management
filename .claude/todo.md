@@ -22,16 +22,19 @@ Setup spine (each item ≈ one small commit; sequenced so each verifies the prev
 
 Framework build order (from `docs/dev/design-sketch.md`; vertical slice first — prove the architecture before widening):
 
-- [ ] `Ledger/Core.lean`: `Ledger`, `ClaimMeta`, `Depth` types
-- [ ] Content hash over `Syntax` tree (pre-elaboration)
-- [ ] `Generator/`: `lake exe gen` — `.kb/` frontmatter → `Corpus/Generated.lean` (committed, diffable)
+- [ ] `Ledger/Core.lean`: `Source`, `Degree`, `Verdict`, `ClaimMeta`, `Depth`, `Claim`, `Ledger`
+- [ ] Content hash: formal over the pre-elaboration `Syntax` tree; informal over
+      the text after the mechanical quotient (encoding, trailing whitespace, wrap)
+- [ ] `Gen/Main.lean`: `lake exe gen` — `corpus/**.kb/*.md` frontmatter →
+      `Corpus/Generated.lean` (committed, diffable)
 - [ ] `Ledger/Laws.lean`: `WellFormed` + `theorem corpus_ok := by decide` — vertical slice end to end over one kb file
-- [ ] Round-trip printer (`Generator/Print.lean`) + CI diff check — the generator is untrusted
+- [ ] `Gen/Print.lean`: `lake exe roundtrip` + CI diff check — the generator is untrusted
 - [ ] Depth artifacts: `stmt : Prop` attachment (described), `pf : stmt` bundling (proven); staleness conjunct in `WellFormed`
-- [ ] `stipulate` frames (hypothesis bundles, never `axiom`)
+- [ ] `Corpus/Frames.lean`: `stipulate` frames, generated alongside the rows
+      (hypothesis bundles, never `axiom`)
 - [ ] Dependency edges walked from proof terms; `#trustbase` = frame fields ∪ `collectAxioms`
 - [ ] `Ledger/Query.lean`: `#status` / `#stale` / `#trustbase` over the value; `lake exe` twins for CI
-- [ ] `Corpus/`: port prior theories (`stance`, `ledger`, `conduct`, `convention`) — system describes itself
+- [ ] `corpus/`: port prior theories (`stance`, `ledger`, `conduct`, `convention`) — system describes itself
 
 Ledger hygiene:
 
