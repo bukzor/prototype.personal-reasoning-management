@@ -14,7 +14,9 @@ Setup spine (each item ≈ one small commit; sequenced so each verifies the prev
 - [ ] CI: `.github/workflows/ci.yml` with `leanprover/lean-action@v1` (`build-args: "--wfail"`); push, verify green on origin
 - [ ] Test skeleton: `Test/` module + `testDriver` in lakefile; one trivial `#guard` + one runtime assertion; `lake test` green locally and in CI
 - [ ] Lint skeleton: Batteries `@[lint_driver]`; `lake lint` green locally and in CI
-- [ ] README + license
+- [ ] README + license — first push to a public `origin` happened
+      2026-07-28, so the repo is live and unlicensed (all rights reserved
+      by default) until this lands
 
 Framework build order (from `docs/dev/design-sketch.md`; vertical slice first — prove the architecture before widening):
 
