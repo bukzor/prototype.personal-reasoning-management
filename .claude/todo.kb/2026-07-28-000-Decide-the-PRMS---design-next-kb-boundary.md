@@ -1,6 +1,6 @@
 ---
 managed-by: Skill(llm-subtask)
-status: exploring
+status: open
 ---
 
 # Decide the PRMS / design-next.kb boundary
