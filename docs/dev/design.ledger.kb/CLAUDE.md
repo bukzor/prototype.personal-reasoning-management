@@ -23,8 +23,9 @@ for fiat, `-- certified(CHECK)` for a re-runnable check.
 
 ## What does not
 
-- **Prose rationale** — `../design-sketch.md`. A ledger line states the
-  commitment; it does not argue for it.
+- **The assembled shape** — `../design-sketch.md`. A ledger line states one
+  commitment; the sketch draws the system they jointly imply, arbitrary
+  concrete choices included.
 - **Empirical/epistemic inquiry** (what's true about Lean, mathlib, CI) —
   `../initial-setup.discourse.kb/`. That graph asks questions; this ledger
   records decisions.

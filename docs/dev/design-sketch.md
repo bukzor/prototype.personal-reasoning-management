@@ -3,102 +3,193 @@ author: Claude Fable
 reviews: null #  TODO
 ---
 
-## Personal Reasoning Management: A Design Sketch
+# Personal Reasoning Management — Design Sketch
 
-Note: this is agent-authored and not yet reviewed in detail by user. The
-"oddest" parts are likely from the user -- it's the "obvious" bits that tend to
-be agent-supplied.
+One concrete realization of the ledger's commitments, drawn whole. A
+label tag (`NATIVE!`, `HYP_FIAT!`, …) means the ledger decides that point
+there; every unlabelled
+concrete choice — names, key spellings, hash width, frame granularity — is
+arbitrary, replaceable without a ledger edit. Where a choice is arbitrary
+the sketch still makes one: a sketch that refuses to pick is a list of
+options, not a design.
 
-**Goal**: A personal reasoning system where the claim ledger is a first-class
-Lean value generated from llm-kb markdown, laws about the claim set are
-theorems the kernel checks, and the authoring surface is plain `.kb/` files.
+## The spine
 
-The governing move (ledger: `NATIVE!`, `LAW`): a registry that is an
-*environment extension* can be queried by metaprograms but not quantified over
-as a term, so every claim about the claim set caps below proof and every
-invariant is a script. A registry that is a *value* — `ledger : Ledger` — can
-be quantified over, so the invariants are theorems and the only checker left
-in the trust base is the kernel.
+Five decisions are minimally unique to this design; everything below is
+their consequence.
 
-**Repo skeleton**
+1. The registry is an object-language *value* the engine quantifies over,
+   not engine state beside the corpus (`NATIVE!`) — so laws about the
+   claim set are kernel-checked theorems (`LAW`, `META_DEPTH`).
+2. A stipulation is a hypothesis, never an axiom (`HYP_FIAT!`,
+   `NO_AXIOMS`) — trust base sits inside the claim's own statement.
+3. Identity is a content hash of the surface statement; every verdict pins
+   the hash it judged, and all standing is computed from that evidence,
+   never stored (`HASH_ID`, `MONOTONE`, `PROJECTION`).
+4. Authoring is markdown; the record is Lean; the translator between them
+   is untrusted and audited by round-trip (`SURFACE_SPLIT`,
+   `UNTRUSTED_XLATE`).
+5. The substrate is Lean4, all-in (`DECISION!`), with one external
+   re-check as the hedge (`AUDIT_SPOKE`).
+
+## Repo skeleton
 
 ```
-lakefile.lean           -- lake project, pin toolchain in lean-toolchain
-Ledger/Core.lean        -- Ledger, ClaimMeta, Depth types
-Ledger/Laws.lean        -- WellFormed + laws, with Decidable instances
-Ledger/Query.lean       -- #status / #stale / #trustbase over the value
-Generator/              -- lake exe gen: .kb frontmatter -> Corpus/Generated.lean
-Generator/Print.lean    -- round-trip printer: value -> kb form, for the CI diff
-Corpus/Generated.lean   -- ledger : Ledger  (generated, committed, diffable)
+lean-toolchain            -- pinned release
+lakefile.toml             -- decided: all our lakefile needs are declarative
+Ledger/Core.lean          -- Source, Degree, Verdict, ClaimMeta, Depth
+Ledger/Laws.lean          -- WellFormed conjuncts; corpus_ok
+Ledger/Query.lean         -- status / stale / trustBase, + #command wrappers
+Gen/Main.lean             -- lake exe gen: corpus/ → Corpus/*.lean
+Gen/Print.lean            -- lake exe roundtrip: value → kb text, for the diff
+Corpus/Generated.lean     -- ledger : Ledger   (generated, committed)
+Corpus/Frames.lean        -- stipulation frames (generated alongside)
+corpus/                   -- authoring surface: llm-kb theories, one dir each
 ```
 
-The authoring surface is not in the skeleton because it is not code: claims
-are authored as llm-kb `.kb/` frontmatter, wherever the corpus lives.
+## Core types (`Ledger/Core.lean`)
 
-**Core datatypes** (`Core.lean`)
+```lean
+inductive Source where                    -- NAME_THE_JUDGE!: judge recorded
+  | user
+  | agent    (name : String)
+  | checker  (name version : String)      -- SOURCE!: one kind, mechanical evidence
+  | imported (doc : String)
 
-- `structure ClaimMeta`: id, surface text, content hash (hash the `Syntax`
-  tree pre-elaboration, not the elaborated term), premises, authority,
-  standing.
-- Depth is *data on the claim*: described attaches `stmt : Prop`; proven
-  bundles `pf : stmt`. The term contains its proofs — deepening appends an
-  artifact to a hash, never migrates the claim.
-- Stipulations: hypothesis bundles — `structure Frame where (h1 : P1) ...` —
-  and asserted claims as theorems over the bundle: `theorem c (f : Frame) : Q`.
-  Trust base = bundle fields ∪ `collectAxioms`. Never `axiom` for ledger
-  stipulations.
+structure Degree where                    -- DEGREE!: default full costs nothing
+  truth certainty utility : Rat := 1
 
-**Laws** (`Laws.lean`)
+structure Verdict where                   -- EVIDENCE_SHAPE+
+  source : Source
+  judged : UInt64                         -- hash at judgment time (MONOTONE)
+  degree : Degree := {}
+  date   : String                         -- ISO 8601; arbitrary
 
-- `theorem corpus_ok : WellFormed ledger := by decide`. The staleness scanner
-  is a conjunct of `WellFormed` — the scanner is a *theorem*, and `lake build`
-  failing is the scan failing.
-- Meta-theorems quantify over all ledgers: `theorem discharge_monotone :
-  ∀ (l : Ledger), WellFormed l → ...` — ordinary Lean, no metaprogramming.
-- `by decide` is comfortable to ~10⁴ claims. Per-law escalation to
-  `native_decide` admits the compiler into that law's trust base — a recorded,
-  per-law trade, never a default.
+structure ClaimMeta where                 -- the registry row: Prop-free,
+  label    : Lean.Name                    --   so DecidableEq derives and
+  hash     : UInt64                       --   `by decide` can run (LAW)
+  text     : String
+  premises : List Lean.Name               -- motivation, not entailment (ARROWS!)
+  evidence : List Verdict                 -- append-only (MONOTONE)
+  deriving DecidableEq, Repr
 
-**Generator** (`Generator/`)
+inductive Depth where                     -- DEPTH_ATTEST: artifacts, as data
+  | stated
+  | described (stmt : Prop)
+  | proven    (stmt : Prop) (pf : stmt)   -- the term contains its proof
 
-- `lake exe gen`: parse `.kb/` frontmatter, emit `Corpus/Generated.lean`.
-  Generation rather than elab-time IO, so the artifact is committed, diffable
-  in review, and export tools see plain Lean.
-- The generator is *untrusted*: CI prints the ledger value back to kb form and
-  diffs it clean (`Print.lean`). A generator bug cannot silently misstate a
-  claim; it either round-trips or fails the build.
+structure Claim where
+  meta  : ClaimMeta
+  depth : Depth
 
-**CI** (one workflow)
+abbrev Ledger := List Claim
+```
 
-1. `lake exe gen` + `git diff --exit-code` — generated module is current.
-2. `lake build` — building *is* checking `corpus_ok`.
-3. Round-trip: print the value back to kb form, diff clean.
-4. Audit spoke: `lean4export` + `lean4checker` over `Corpus/` — external
-   kernel re-check; the generated module is ordinary declarations, so the
-   export sees the corpus whole.
+Laws run over `ledger.map (·.meta)`, the decidable projection; the pin
+between a row and its `Depth` artifact is the elaborator's job — the
+generator emits them adjacent, and a missing artifact is a build failure,
+which is already a kernel-grade check.
 
-**Build order for the agent**
+Hashing: formal content hashes the pre-elaboration `Syntax` tree
+(`HASH_FORMAL`); informal text hashes the string after the mechanical
+quotient — encoding, trailing whitespace, line wrap, nothing else
+(`QUOTIENT!`). No law reads labels (`NAME_BLIND`).
 
-1. Toolchain pin + empty lake project + CI green (half a day).
-2. `Ledger/Core.lean` types + hash function over `Syntax` (day).
-3. **Vertical slice**: generator over one `.kb/` file → `Generated.lean` +
-   `WellFormed` + `by decide` + round-trip check in CI, end to end (1–2 days).
-4. Depth artifacts: `stmt` attachment, `pf` bundling; staleness conjunct
-   (1–2 days).
-5. Frames + dependency edges walked from proof terms + `#trustbase` (2 days).
-6. Port the prior theories of the actual ledger (`stance`, `ledger`,
-   `conduct`, `convention`) as the first corpus — the system describes itself;
-   this shakes out the surface ergonomics before DTPL content arrives.
-7. Query polish, widgets, `duper`/`exact?` integration notes — after daily use
-   begins, not before.
+## Frames (`Corpus/Frames.lean`)
 
-**Known hazards to encode as comments now**: syntax-tree hashing re-baselines
-on toolchain bumps — re-verifying acquires fresh verdicts, it never repairs
-records (`VERSION_OUT+`); the generator is the churn surface — keep it small;
-never let a verdict become an `axiom`; `native_decide` is per-law and
-recorded, never reached for by reflex.
+One frame per theory, extending its priors' frames along the poset —
+granularity arbitrary, the mechanism not (`HYP_FIAT!`, `FRAME_BUNDLE+`):
 
-Point estimate to a usable daily system: **under two focused weeks** for steps
-1–6 — the value-based design deletes the environment-extension and elab-verb
-metaprogramming that dominated the old estimate. Start at step 3: the vertical
-slice proves the architecture before you've spent anything.
+```lean
+structure Frame.stance where
+  REGRESS_ACT : Stmt.REGRESS_ACT          -- one field per stipulation
+
+structure Frame.ledger extends Frame.stance where
+  LAST_WINS : Stmt.LAST_WINS
+
+theorem C.STALE_PROP.pf (f : Frame.ledger) : Stmt.STALE_PROP := …
+```
+
+Trust base of an assertion = its frame's fields ∪ `collectAxioms` over its
+proof — computed, never listed by hand (`TRUST_BASE`, `INTROSPECT`).
+
+## Laws (`Ledger/Laws.lean`)
+
+```lean
+def WellFormed (rows : List ClaimMeta) : Prop :=
+  premisesResolve rows ∧ stipulationsAuthored rows ∧ staleDebtAcknowledged rows
+
+theorem corpus_ok : WellFormed (ledger.map (·.meta)) := by decide
+```
+
+The staleness scanner is the third conjunct — a verdict whose `judged`
+hash is no longer its claim's current hash is debt, reported by the query
+and bounded by the law (`FALLOUT!`, `V1_CHECKERS+`). `by decide` is
+comfortable to ~10⁴ claims; per-law escalation to `native_decide` is a
+recorded trade of the compiler into that law's trust base (`TRUST_COST`),
+never a default. Meta-theorems — `∀ rows, WellFormed rows → …` — are
+ordinary Lean over the same types.
+
+## Pipeline and CI
+
+```
+corpus/**.kb/*.md ──lake exe gen──► Corpus/*.lean ──lake build──► corpus_ok ✓
+        ▲                                │
+        └────── lake exe roundtrip ◄─────┘        diff clean, or the build dies
+```
+
+CI is four steps: (1) `gen` + `git diff --exit-code`, (2) `lake build` —
+building *is* checking `corpus_ok`, (3) round-trip diff
+(`UNTRUSTED_XLATE`), (4) lean4export + lean4checker over `Corpus/` — the
+generated module is ordinary declarations, so the external kernel sees the
+corpus whole (`AUDIT_SPOKE`).
+
+## Verbs (`BASIS_API!`, `VERB_TARGETS`)
+
+Authoring is editing frontmatter; the generator does the rest. Keys are
+arbitrary; the four verbs are not.
+
+| verb | frontmatter delta | generated |
+|---|---|---|
+| claim | `claim:`, `text:` | registry row, `Depth.stated` |
+| describe | + `stmt:` (Lean prop) | `def X.stmt : Prop` — elaborates, no proof owed |
+| stipulate | + `authority:` | field in its theory's frame, authored (`STIP`) |
+| assert | + `proof:` (tactic block) | `theorem X.pf (f : Frame.θ) : X.stmt`; premises walked from the proof term |
+
+Queries `#status` / `#stale` / `#trustbase` are functions over `ledger`,
+with `lake exe` twins for CI.
+
+End to end, porting this ledger's own `LEAST_FIX!` (`SELF_HOST!`):
+
+```yaml
+--- # corpus/ledger.kb/least-fix.md
+claim: LEAST_FIX
+authority: user
+premises: [ASSERT]
+text: Provenness is the least fixpoint of ASSERT — cycles are unproven.
+---
+```
+
+```lean
+-- Corpus/Generated.lean (generated; do not edit)
+def C.LEAST_FIX : ClaimMeta :=
+  { label := `LEAST_FIX, hash := 0xa3f0c2e1d4b59876, text := "Provenness is …",
+    premises := [`ASSERT],
+    evidence := [{ source := .user, judged := 0xa3f0c2e1d4b59876,
+                   date := "2026-07-28" }] }
+```
+
+## Hazards, encoded as comments from day one
+
+Toolchain bumps re-baseline `Syntax` hashes — re-verifying acquires fresh
+verdicts under the new authority, it never repairs records
+(`VERSION_OUT`). The generator is the churn surface — keep it small
+(`CHURN`). A verdict never becomes an `axiom` (`NO_AXIOMS`). Persistence
+is the source file; if a feature wants runtime state beside the
+declarations, it is the rejected branch returning (`NO_SIDECAR`).
+
+## Where the rest lives
+
+- The commitments themselves: `design.ledger.md` + `design.ledger.kb/`
+- Per-mechanism rationale: `design.ledger.kb/world.kb/lean-realize.kb/`
+- Build order: `.claude/todo.md` — vertical slice first

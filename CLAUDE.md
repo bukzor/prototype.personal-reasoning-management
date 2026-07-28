@@ -12,7 +12,7 @@ depends:
 A framework for defeasible claims and their mandates/authority/proofs,
 built in Lean 4.
 
-- Design rationale, in prose: `docs/dev/design-sketch.md`
+- Design sketch — the committed shape drawn concrete: `docs/dev/design-sketch.md`
 - Design ledger — the labelled claims the design commits to, by theory:
   `docs/dev/design.ledger.md`
 - User stories — the demands the design must serve, gaps marked
