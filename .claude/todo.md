@@ -36,6 +36,11 @@ Framework build order (from `docs/dev/design-sketch.md`; vertical slice first �
 We haven't (yet) decided where to place these in the task queue.
 Please read and consider slotting them.
 
+- [ ] Law candidate: citation integrity — every claim-label mention across
+      corpus surfaces (stories, facets, prose) resolves to a defined claim
+      and bears its current sigil. Manual grep today (done twice by hand,
+      2026-07-28); a `WellFormed` conjunct once the translator ingests
+      prose mentions. Sigil flips then surface every stale citation.
 - [ ] doc-gen4 API docs → GitHub Pages from CI
 - [ ] lean4export + lean4checker external-audit CI step over `Corpus/`
 - [ ] InfoView claim-graph widget (`Ledger/Widget.lean`)
