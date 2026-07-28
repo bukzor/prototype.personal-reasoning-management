@@ -14,6 +14,6 @@ sets that stay green under daily edits and toolchain churn.
   durability lived — toolchain churn absorbed by re-verification, never
   by trusting old verdicts.
 
-**Informs:** LAW, VERSION_OUT+, CHURN;
+**Informs:** LAW, VERSION_OUT!, CHURN;
 `../user-stories.kb/ten-year-durability.md`,
 `../user-stories.kb/revise-and-live-with-fallout.md`.

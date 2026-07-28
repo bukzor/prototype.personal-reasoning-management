@@ -20,14 +20,14 @@ the same thing incompatibly.
 
 ## Open Questions
 
-- [ ] Wake/staleness ownership: PRMS `#stale` (STALE_ACK+, LAW) vs the
+- [ ] Wake/staleness ownership: the PRMS staleness query (FALLOUT!, LAW) vs the
       llm-triggers sweep design-next assumes. One mechanism or two, and
       who is upstream?
 - [ ] Translator target: if v2 ships `kb-spec.md` / `kb doctor`,
       should UNTRUSTED_XLATE ingest that spec rather than invent a
       parallel one?
 - [ ] Identity mapping: design-next's dated-record newest-wins vs PRMS
-      content-hash + LAST_WINS — reconcilable projections of one
+      content-hash + LAST_WINS! — reconcilable projections of one
       identity scheme, or genuinely different?
 
 ## Success Criteria

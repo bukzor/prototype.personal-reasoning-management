@@ -20,7 +20,7 @@ decision that justified it. The suite's own verdict on its devlogs:
 written every session, read approximately never — the record shape this
 family produces without checkers.
 
-**Informs:** LAST_WINS, MONOTONE (supersession-as-pointer, never
+**Informs:** LAST_WINS!, MONOTONE (supersession-as-pointer, never
 deletion);
 `../../user-stories.kb/record-decisions-with-reopeners.md`,
 `../../user-stories.kb/migrate-conventions-without-loss.md`.

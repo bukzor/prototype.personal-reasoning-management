@@ -21,14 +21,14 @@ sound, open, or retracted — is the RN axiom every rung realizes.
   bare-form-stays-legal, cheaper-to-use-than-to-ignore,
   survives-dumb-media — each a test any PRMS surface must also pass
   (the first is an InfoView-hover demand, the second a checkable
-  CMD_SURFACE law).
+  BASIS_API! law).
 
 **Miss:** standing is eyeballed, never computed. No checker runs;
 `certified(CHECK)` names a re-runnable check that nothing re-runs; the
 ledger lives and dies with the conversation unless hand-flushed. The
-notation is PRMS at the fidelity a chat window supports — `IMAGE+` says
+notation is PRMS at the fidelity a chat window supports — `IMAGE!` says
 exactly this — and the fidelity gap is the project.
 
-**Informs:** ARROWS!, IMAGE+, LAST_WINS, NAME_THE_JUDGE+, LEAST_FIX+;
+**Informs:** ARROWS!, IMAGE!, LAST_WINS!, NAME_THE_JUDGE!, LEAST_FIX!;
 `../../user-stories.kb/veto-scan-agent-claims.md`,
 `../../user-stories.kb/the-corpus-binds-my-agents.md`.

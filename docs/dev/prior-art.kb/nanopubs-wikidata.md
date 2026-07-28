@@ -15,6 +15,6 @@ scale.
 - Provenance as a separate mandatory graph, not an optional annotation —
   who asserted, from what method or source.
 
-**Informs:** HASH_ID, STATUS, NAME_THE_JUDGE+;
+**Informs:** HASH_ID, STATUS, NAME_THE_JUDGE!;
 `../user-stories.kb/veto-scan-agent-claims.md` (standing must live in
 the value).

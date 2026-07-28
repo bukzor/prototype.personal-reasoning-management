@@ -16,6 +16,6 @@ real life.
   both without confusion.
 - Plugins as user-defined laws over the parsed ledger value.
 
-**Informs:** SURFACE_SPLIT, CMD_SURFACE, V1_CHECKERS+, DAILY_CRITERIA!;
+**Informs:** SURFACE_SPLIT, BASIS_API!, V1_CHECKERS+, DAILY_CRITERIA!;
 `../user-stories.kb/capture-without-ceremony.md`,
 `../user-stories.kb/ten-year-durability.md`.

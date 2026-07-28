@@ -12,9 +12,10 @@ STATUS, PROJECTION (staleness is a projection over hash-attached
 verdicts, and acknowledgement is a fresh verdict at the current hash —
 degree repriceable — so acknowledged debt is representable, not a new
 mechanism), UNFORCED! (re-adjudicating *over days, at my own pace* is
-exactly the deferral entitlement it names), STALE_ACK+ (well-formedness
-demands only that staleness be *acknowledged* — an honest revision
-reddens the build until its fallout has been seen, not for the week of
-re-adjudication), QUOTIENT! (what counts as a revision at all: only
+exactly the deferral entitlement it names), FALLOUT! (the
+consistency-restoration interval gets ergonomic affordances — an honest
+revision is debt worked down over days, never a red build for the week
+of re-adjudication; acknowledgement-clears-red is one candidate
+affordance), QUOTIENT! (what counts as a revision at all: only
 edits the mechanical quotient can't absorb strand verdicts, so
 reflowing prose is free and rewording is priced honestly).

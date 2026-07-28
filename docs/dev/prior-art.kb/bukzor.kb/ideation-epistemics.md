@@ -33,6 +33,6 @@ of the ladder while the rung the operator stands on daily stayed
 unbuilt — which is why PRMS is procurement of a working engine rather
 than a further design pass.
 
-**Informs:** SPAN!, PROCURE!, CHECKER, SELF_HOST!, IMAGE+;
+**Informs:** SPAN!, PROCURE!, CHECKER, SELF_HOST!, IMAGE!;
 `../../user-stories.kb/shallow-corpus-still-pays.md`,
 `../../user-stories.kb/revise-and-live-with-fallout.md`.

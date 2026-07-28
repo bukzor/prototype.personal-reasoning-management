@@ -11,7 +11,7 @@ convention today.
 
 - `why:` as the premise arrow for norms: every entry names what
   motivates it, so design content has authorship and lineage —
-  `AUTHOR_ACTS+` applied to requirements.
+  `AUTHOR_ACTS!` applied to requirements.
 - `[!QUESTION]` with a death rite: `grep -r '\[!QUESTION\]'` is the
   standing "where does the spec run out" query, and a gap dies only
   when a ledger claim lands — a lifecycle, not an annotation.

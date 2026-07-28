@@ -60,7 +60,7 @@ for this one. The rest
 do not correspond and are not meant to: `ledger` is this project's rung
 and has no counterpart there, `good-smells` is the skill's and has none
 here, and the two `purpose` theories share only a name (`NAME_REUSE+`).
-`NAME_THE_JUDGE+` is stated there inside `AUTHOR_ACTS` rather than as
+`NAME_THE_JUDGE!` is stated there inside `AUTHOR_ACTS` rather than as
 its own claim, since nothing over there cites it.
 
 Neither copy is a pointer to the other: divergence across the overlap is

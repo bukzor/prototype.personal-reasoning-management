@@ -34,7 +34,7 @@ asserts, so `described` has to be encoded as a wff whose grammar-parse is itself
 a proof. That parse is a genuine elaborator verdict, so it satisfies
 `DEPTH_ATTEST` rather than working around it. Under `NATIVE` the question does
 not arise — but it was the cheapest available falsification test for
-`CMD_SURFACE`'s substrate-independence, and that test is now unrun.
+`BASIS_API!`'s substrate-independence, and that test is now unrun.
 
 ## Why the authoring floor is raisable
 

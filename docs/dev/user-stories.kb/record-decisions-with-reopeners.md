@@ -12,7 +12,7 @@ law must exist below the line (GENERIC_BASE!). Nothing bars the base
 from serving it directly either; where it lands is pricing, not
 commitment.
 
-**Served by:** NAME_THE_JUDGE+, FIAT_SHIFT, the last-wins /
+**Served by:** NAME_THE_JUDGE!, FIAT_SHIFT, the last-wins /
 rejected-forks-in-line conventions, and REOPEN+ (a reopening condition
 is content on the decision claim, on the ordinary depth ladder — prose
 reopeners are the stated rung, machine-checkable ones the staleness law

@@ -10,7 +10,7 @@ what survives is the answer, its price, and the pole that lost.
   numbers
 - `defeated by:` any of them changing — a release, a rewrite, a project dying
 
-- PLEASURE_RANK <- DAILY_CRITERIA!, CMD_SURFACE: Only Lean4 satisfies all of DAILY_CRITERIA, because it absorbs CMD_SURFACE as native syntax and inherits the LSP; ranking is Lean4 > Metamath > Isabelle > ACL2 > Agda
+- PLEASURE_RANK <- DAILY_CRITERIA!, BASIS_API!: Only Lean4 satisfies all of DAILY_CRITERIA, because it absorbs BASIS_API! as native syntax and inherits the LSP; ranking is Lean4 > Metamath > Isabelle > ACL2 > Agda
 - DAILY_LOOP <- DAILY_CRITERIA!, NATIVE!: The Lean4 loop is the best available in interactive theorem proving — sub-second incremental feedback, LSP hover/goto/completion on the ledger's own verbs for free, `exact?`/`simp`/`aesop`/`duper`, InfoView widgets for claim-graph rendering; a fully-built bespoke Metamath surface's ceiling is roughly Lean's floor
 - ECOSYSTEM <- CORPUS!: Lean4 is where DTPL metatheory is currently done at scale, so for CORPUS the best-suited system was going to be Lean regardless; mathlib, Batteries, doc-gen and `lake` CI templates come with it
 - CHURN <- NATIVE!: The rent on NATIVE is toolchain churn — the elaborator API is exactly the surface that moves. The registry-as-value realization keeps most machinery off it: no `elab` commands, no environment extensions, no widgets in the trunk; what rides the moving API is `Syntax` hashing and the generator. Budget 1-2 days per quarter of maintenance, indefinitely. Metamath's rent was zero, which was its entire pitch

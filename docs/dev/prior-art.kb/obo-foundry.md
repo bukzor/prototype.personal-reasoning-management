@@ -26,6 +26,6 @@ CI-enforced laws, and permanent identity survives daily editing at
   whole-corpus check stays CI-cheap; their 10⁴-terms-under-CI is direct
   evidence for the decidable-law scale estimate.
 
-**Informs:** LAW, MONOTONE, HASH_ID, NAME_REUSE+, the theory poset;
+**Informs:** LAW, MONOTONE, HASH_ID, NAME_REUSE+, FALLOUT! (obsoletion-never-deletion with replaced-by pointers is twenty years of lived affordance for the consistency-restoration interval), the theory poset;
 `../user-stories.kb/revise-and-live-with-fallout.md` (obsoletion vs
 build failure), `../user-stories.kb/the-system-tells-me-what-i-didnt-say.md`.

@@ -6,5 +6,5 @@ formal statement owed. It is in the corpus at the next generation, and
 nothing about capture commits me to ever deepening it.
 
 **Served by:** SPAN! (this is its informal pole), SURFACE_SPLIT,
-CMD_SURFACE, UNTRUSTED_XLATE, TURN_SCARCITY+. This story is why the
+BASIS_API!, UNTRUSTED_XLATE, TURN_SCARCITY!. This story is why the
 authoring surface is markdown.

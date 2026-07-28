@@ -17,4 +17,4 @@ claims, moved only by named upgrade/downgrade rules.
   calibration is authority's report card.
 
 **Informs:** the ClaimMeta-likelihood QUESTION in
-`../user-stories.kb/reason-across-realms.md`; NAME_THE_JUDGE+.
+`../user-stories.kb/reason-across-realms.md`; NAME_THE_JUDGE!.
