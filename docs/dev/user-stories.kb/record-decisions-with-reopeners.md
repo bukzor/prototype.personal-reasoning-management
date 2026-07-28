@@ -5,12 +5,8 @@ was weighed, what was rejected and why, whose authority closed it — and
 what evidence would reopen it. When that evidence arrives, the decision
 itself shows stale, not merely the claims downstream of it.
 
-**Served by:** NAME_THE_JUDGE+, FIAT_SHIFT, and the last-wins /
-rejected-forks-in-line conventions.
-
-> [!QUESTION] are reopening conditions convention or mechanism?
-> Nothing yet makes a decision's reopening condition machine-checkable —
-> the record is prose. That may be fine: a reopener often names evidence
-> only a human can recognize. Settles by deciding, in `convention` or
-> `ledger`, whether reopeners stay prose or become claims the staleness
-> law can watch.
+**Served by:** NAME_THE_JUDGE+, FIAT_SHIFT, the last-wins /
+rejected-forks-in-line conventions, and REOPEN+ (a reopening condition
+is content on the decision claim, on the ordinary depth ladder — prose
+reopeners are the stated rung, machine-checkable ones the staleness law
+watches; convention versus mechanism was depth all along).

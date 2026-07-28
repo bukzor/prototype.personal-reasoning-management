@@ -9,13 +9,8 @@ that must be queried to be heard goes unread like any reference doc.
 
 **Served by:** SURFACE_SPLIT (the authoring surface is free to organize
 for push — trigger-named paths — while the record stays canonical),
-NAMES_INDEX+, AFFORDANCE+. The pull half of this coin is
-`interrogate-before-acting.md`.
-
-> [!QUESTION] are triggers claim data or surface layout?
-> Today a trigger lives in the *path*, invisible to the value — no law
-> can state "every act-type has a claim watching it" or notice an
-> orphaned trigger. Either trigger conditions become claim data the
-> engine can enumerate, or we rule that push is a surface concern the
-> record never sees. Settles in `ledger` (is the trigger part of the
-> claim?) with a `host` realization either way.
+NAMES_INDEX+, AFFORDANCE+, TRIGGER_CONTENT+ (the trigger condition is
+claim content the engine can enumerate, so "every act-type has a claim
+watching it" is stateable and an orphaned trigger is noticeable;
+trigger-named paths become a projection of that data). The pull half of
+this coin is `interrogate-before-acting.md`.

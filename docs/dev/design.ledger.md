@@ -56,15 +56,21 @@ the correspondence is a grep rather than a table: `REGRESS_ACT`,
 `AUTHOR_ACTS`, `PARSIMONY`, `ARROWS`, `IMAGE`, `LEAST_FIX`,
 `CLAIMS_ONLY`. Stated there for any claim notation, here for this one.
 
-The rest do not correspond and are not meant to: `ledger` is this
-project's rung and has no counterpart there, `good-smells` is the
-skill's and has none here, and the two `purpose` theories share only a
-name (`NAME_REUSE+`). `NAME_THE_JUDGE+` is stated there inside
-`AUTHOR_ACTS` rather than as its own claim, since nothing over there
-cites it.
+Four more are the same commitment under different labels — alignment
+debt rather than independent claims: its `STIPULATION` is `STIP` +
+`WARRANT!`, its `OUTLIVES` is `SELF_CONTAINED!` + `FRESH_READER+`, its
+`FIAT` is `PROVISIONAL`, and its `INVARIANT` is `TRICHOTOMY+`. The rest
+do not correspond and are not meant to: `ledger` is this project's rung
+and has no counterpart there, `good-smells` is the skill's and has none
+here, and the two `purpose` theories share only a name (`NAME_REUSE+`).
+`NAME_THE_JUDGE+` is stated there inside `AUTHOR_ACTS` rather than as
+its own claim, since nothing over there cites it.
 
 Neither copy is a pointer to the other: divergence across the overlap is
-the drift check, and a defect in one of the two.
+the drift check, and a defect in one of the two. One standing asymmetry
+is on record: `CLAIMS_ONLY` is certified here (review 089) and fiat
+there — not content drift, but the discharge belongs on the skill's
+side.
 
 ## Reading and amending
 

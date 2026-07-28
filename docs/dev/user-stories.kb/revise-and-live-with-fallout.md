@@ -12,12 +12,7 @@ STATUS, PROJECTION (staleness is a projection over hash-attached
 verdicts, and acknowledgement is a fresh verdict at the current hash —
 degree repriceable — so acknowledged debt is representable, not a new
 mechanism), UNFORCED! (re-adjudicating *over days, at my own pace* is
-exactly the deferral entitlement it names).
-
-> [!QUESTION] is staleness build-failure or acknowledged debt?
-> Mechanism settled by PROJECTION; what remains is only policy: whether
-> `WellFormed` keeps a staleness conjunct (build red while stale) or
-> demands no *unacknowledged* staleness while `#stale` merely reports —
-> one honest revision must not make the corpus red for a week, and
-> validation taxing the daily loop is exactly what INFER! forbids.
-> Settles in `host` (LAW / V1_CHECKERS+).
+exactly the deferral entitlement it names), STALE_ACK+ (well-formedness
+demands only that staleness be *acknowledged* — an honest revision
+reddens the build until its fallout has been seen, not for the week of
+re-adjudication).
