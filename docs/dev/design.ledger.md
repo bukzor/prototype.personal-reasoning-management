@@ -48,12 +48,20 @@ and `convention` should survive any substrate change.
 
 Nothing in `stance` or `convention` is specific to this project, and the
 medium-independent form of both is carried in `Skill(llm-claim-ledger)`,
-whose `design.kb/` is itself a ledger in theories: `stance.kb/` and
+whose `design.ledger.kb/` is itself a ledger in theories: `stance.kb/` and
 `purpose.kb/` for what the notation is for, `good-smells.kb/` for the
-criteria, `notation.kb/` for the decisions. The two copies are the same
-commitments at different fidelity: divergence between them is a defect in
-one of the two, and the copies here are the ones that may cite `ledger`
-vocabulary.
+criteria, `notation.kb/` for the decisions. Roughly seven claims are the
+same commitment on both sides — `REGRESS_ACT+`/`ACT`, `AUTHOR_ACTS+`/`AUTH`,
+`PARSIMONY+`/`PAR`, `ARROWS!`/`ARW`, `IMAGE+`/`IMG`, `LEAST_FIX+`/`CY`,
+`CLAIMS_ONLY!`/`ONE` — stated there for any claim notation and here for
+this one. The rest do not correspond and are not meant to: `ledger` is
+this project's rung and has no counterpart there, `good-smells` is the
+skill's and has none here, and the two `purpose` theories share only a
+name (`NAME_REUSE+`). `NAME_THE_JUDGE+` is stated there inside `AUTH`
+rather than as its own claim, since nothing over there cites it.
+
+Neither copy is a pointer to the other: divergence across the overlap is
+the drift check, and a defect in one of the two.
 
 ## Reading and amending
 
