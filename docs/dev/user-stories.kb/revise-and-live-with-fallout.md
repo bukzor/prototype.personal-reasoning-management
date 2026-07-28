@@ -14,7 +14,7 @@ STATUS.
 > As specified, staleness is a conjunct of `WellFormed`, so the build fails
 > while anything is stale — right for CI, wrong for the daily loop: one
 > honest revision makes the corpus red for a week, and validation taxing
-> the daily loop is exactly what INFER_TERTIARY! forbids. The demand is a
+> the daily loop is exactly what INFER! forbids. The demand is a
 > law of the form "no *unacknowledged* staleness": an acknowledged-stale
 > standing that keeps the build green while the debt stays visible and
 > enumerable. Settles as a ledger claim (likely `ledger`-theory standing

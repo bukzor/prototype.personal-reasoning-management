@@ -8,16 +8,18 @@ verdict. Validation is not a sibling of this but its special case: the
 inference whose extracted object is a proof that the corpus is
 well-formed.
 
-Tertiary, by decree (INFER_TERTIARY!): this is the unproven, exciting
-pole of the experiment, and it may never tax speed-of-thought capture or
-the continuum between the poles.
+Asserted, and subordinate, by decree (INFER!): the system is procured to
+infer, not only to record — but this purpose sits below everyday use and
+may never tax speed-of-thought capture or the continuum between the
+poles. The bet that inference and everyday use coexist in harmony is
+SPAN!'s, and it is allowed to fail.
 
-**Served by:** SPAN!, INFER_TERTIARY!, SELF_APPLY, LAW (the special case
-is already specified end to end — `corpus_ok` extracts a proof).
+**Served by:** SPAN!, INFER!, SELF_APPLY, LAW (the special case is
+already specified end to end — `corpus_ok` extracts a proof).
 
 > [!QUESTION] where does the inferred layer live?
 > The generator runs surface→value; nothing yet runs value→derived
 > claims. Unspecified: whether derived claims materialize into the
 > corpus, how inferred is distinguished from asserted, and what keeps the
-> inferred layer current. Gated by INFER_TERTIARY!'s priority; settles in
-> `host`, after the primary poles are served.
+> inferred layer current. Gated by INFER!'s subordination; settles in
+> `host`, after everyday use is served.
