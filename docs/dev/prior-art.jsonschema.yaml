@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://json-schema.org/draft-07/schema
+$schema: "http://json-schema.org/draft-07/schema#"
+description: >
+  Entries in prior-art.kb/ are prose-only; frontmatter appears only on
+  synthesis files rolling up a sibling sub-collection (e.g. bukzor.md
+  for bukzor.kb/).
+type: object
+additionalProperties: false
+required:
+  - last-updated
+properties:
+  last-updated:
+    description: When this synthesis was last brought up to date with its collection
+    type: date  # YAML parses ISO dates as date objects; see llm-kb schema-design

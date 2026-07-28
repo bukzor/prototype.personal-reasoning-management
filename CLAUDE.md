@@ -17,6 +17,8 @@ built in Lean 4.
   `docs/dev/design.ledger.md`
 - User stories — the demands the design must serve, gaps marked
   `[!QUESTION]`: `docs/dev/user-stories.kb/`
+- Prior art — external systems' gems and which gaps they inform:
+  `docs/dev/prior-art.kb/`
 - Setup discourse — questions and claims about the toolchain:
   `docs/dev/initial-setup.discourse.kb/`
 
