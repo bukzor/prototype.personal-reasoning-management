@@ -6,7 +6,8 @@ unvetoed claim stands with full warrant. I review by scanning, never by
 interrogating the agent.
 
 **Served by:** PROVISIONAL, STATUS, NAME_THE_JUDGE+ (the sigil discipline
-of `Skill(llm-claim-ledger)`).
+of `Skill(llm-claim-ledger)`). This is agents *writing*; agents *reading
+under obligation* is `the-corpus-binds-my-agents.md`.
 
 > [!QUESTION] do sigils survive translation into the value?
 > Sigils are currently a surface convention. If the translator does not

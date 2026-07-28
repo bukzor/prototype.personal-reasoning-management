@@ -7,3 +7,6 @@ under the whole thing.
 
 **Served by:** INTROSPECT, TRUST_BASE, NAME_THE_JUDGE+, FRAME_BUNDLE+,
 CMD_SURFACE (`#trustbase` and kin over the registry value).
+
+This is the pull half of consumption; the push half is
+`the-right-claims-find-me.md`.
