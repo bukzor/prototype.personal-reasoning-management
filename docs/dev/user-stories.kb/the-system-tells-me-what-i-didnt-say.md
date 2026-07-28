@@ -18,8 +18,9 @@ SPAN!'s, and it is allowed to fail.
 already specified end to end — `corpus_ok` extracts a proof).
 
 > [!QUESTION] where does the inferred layer live?
-> The generator runs surface→value; nothing yet runs value→derived
-> claims. Unspecified: whether derived claims materialize into the
-> corpus, how inferred is distinguished from asserted, and what keeps the
-> inferred layer current. Gated by INFER!'s subordination; settles in
-> `host`, after everyday use is served.
+> Banked in the ledger as INFER_LAYER? (`host`). The generator runs
+> surface→value; nothing yet runs value→derived claims. Unspecified:
+> whether derived claims materialize into the corpus, how inferred is
+> distinguished from asserted, and what keeps the inferred layer
+> current. Gated by INFER!'s subordination; settles after everyday use
+> is served.
