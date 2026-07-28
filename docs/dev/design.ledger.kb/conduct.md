@@ -5,7 +5,7 @@ design; a theory about the process authoring it, sharing the ledger's
 vocabulary because what a turn produces is claims.
 
 - `prior:` ledger
-- `ontology:` turn, counterparty, assistant, discourse, residue, noticing
+- `ontology:` turn, counterparty, assistant, discourse, residue, noticing, plane
 - `defeated by:` a change in what is scarce — a counterparty whose turns are
   free, or assistant computation that is not
 
@@ -17,3 +17,4 @@ vocabulary because what a turn produces is claims.
 - NOTICE_LIMIT <- NO_RESIDUE: Conduct principles close only *noticed* residue. They convert permission failures — could have decided, didn't — into non-failures; they cannot convert detection failures. A stipulation shipped with a warrant its author believes and that is nonetheless unsound satisfies NO_RESIDUE and is still wrong
 - EVAL_TURN <- NOTICE_LIMIT, VERDICT!: Acceptance of assistant output is a counterparty verdict the assistant cannot self-issue — self-acceptance is a hidden oracle. Evaluation turns are therefore irreducible in principle, and NO_RESIDUE bounds turn count from below rather than driving it toward zero
 - PROVISIONAL <- NOTICER, LAST_WINS: The `+` sigil is the provisional tag every noticer-stipulated choice carries — full warrant, revocable by the counterparty on sight with no justification owed. Revocation is any later stipulation on the same subject. `?` and `+` are the two sigils wanting the counterparty's eye and they want opposite things: `?` an answer, `+` a veto
+- THREE_PLANES! <- SURFACE_SPLIT: Design work divides across three planes — formal need, record shape, and authoring/reading surface. SURFACE_SPLIT separates them so each can be simple; this binds them: a change in one plane is incomplete until the other two are checked for adjustment, and the simplicity of all three is attacked continually -- authority: user
