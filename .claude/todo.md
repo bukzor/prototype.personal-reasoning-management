@@ -18,16 +18,16 @@ Setup spine (each item ≈ one small commit; sequenced so each verifies the prev
 
 Framework build order (from `docs/dev/design-sketch.md`; vertical slice first — prove the architecture before widening):
 
-- [ ] `Ledger/Core.lean`: `ClaimMeta`, `Depth` types
+- [ ] `Ledger/Core.lean`: `Ledger`, `ClaimMeta`, `Depth` types
 - [ ] Content hash over `Syntax` tree (pre-elaboration)
-- [ ] `Ledger/Ext.lean`: `PersistentEnvExtension` claim registry
-- [ ] `Ledger/Cmds.lean`: `claim` + `#status` — shallow-only vertical slice, end to end
-- [ ] `describe` verb + hash storage
-- [ ] `Ledger/Scan.lean`: `#stale` + `lake exe scan`
-- [ ] CI: add `lake exe scan` step (fail on stale)
+- [ ] `Generator/`: `lake exe gen` — `.kb/` frontmatter → `Corpus/Generated.lean` (committed, diffable)
+- [ ] `Ledger/Laws.lean`: `WellFormed` + `theorem corpus_ok := by decide` — vertical slice end to end over one kb file
+- [ ] Round-trip printer (`Generator/Print.lean`) + CI diff check — the generator is untrusted
+- [ ] Depth artifacts: `stmt : Prop` attachment (described), `pf : stmt` bundling (proven); staleness conjunct in `WellFormed`
 - [ ] `stipulate` frames (hypothesis bundles, never `axiom`)
-- [ ] `assert` verb + dependency-edge extraction from proof terms
-- [ ] `Corpus/`: port L0–L2 of the actual ledger (system describes itself)
+- [ ] Dependency edges walked from proof terms; `#trustbase` = frame fields ∪ `collectAxioms`
+- [ ] `Ledger/Query.lean`: `#status` / `#stale` / `#trustbase` over the value; `lake exe` twins for CI
+- [ ] `Corpus/`: port prior theories (`stance`, `ledger`, `conduct`, `convention`) — system describes itself
 
 ## Later
 
@@ -36,7 +36,6 @@ Please read and consider slotting them.
 
 - [ ] doc-gen4 API docs → GitHub Pages from CI
 - [ ] lean4export + lean4checker external-audit CI step over `Corpus/`
-- [ ] `#trustbase` query command
 - [ ] InfoView claim-graph widget (`Ledger/Widget.lean`)
 - [ ] Revisit autoformatting if the official formatter ships (leanprover/lean4#369)
 - [ ] Reservoir publishing / versioned releases
