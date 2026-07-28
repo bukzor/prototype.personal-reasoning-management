@@ -86,8 +86,23 @@ Framework build order (from `docs/dev/design-sketch.md`; vertical slice first �
     `Test/Main`, not `#guard`
   - toolchain note: v4.32 String API returns slices/iterators — `splitOn`
     and `.trimAscii.copy` are the List/String-returning forms
-- [ ] `Gen/Main.lean`: `lake exe gen` — `corpus/**.kb/*.md` frontmatter →
+- [x] `Gen/Main.lean`: `lake exe gen` — `corpus/**.kb/*.md` frontmatter →
       `Corpus/Generated.lean` (committed, diffable)
+  - determinism is load-bearing (CI diffs the regenerated file): sorted
+    path order, and `authority:` requires `date:` in frontmatter — the
+    generator never invents evidence. Frontmatter subset is flat and
+    canonical (one `key: value` per line, flow-list premises) so the
+    round-trip printer can reproduce it byte-exact
+  - `corpus/ledger.kb/least-fix.md` is the slice's claim (sketch's
+    `SELF_HOST!` example + required `date:`); `Corpus` lib is in
+    `defaultTargets`, so `lake build` elaborates and `lake lint` lints
+    the generated module
+  - `Test/Basic` re-derives the emitted hash literal in the kernel
+    against `ContentHash.ofText` — generator output cross-checked by the
+    library before the roundtrip item lands
+  - NOTE for Laws item: `LEAST_FIX`'s premise `ASSERT` is not in the
+    corpus — `premisesResolve` will fail until `ASSERT` is ported or the
+    premise list is trimmed
 - [ ] `Ledger/Laws.lean`: `WellFormed` + `theorem corpus_ok := by decide` — vertical slice end to end over one kb file
 - [ ] `Gen/Print.lean`: `lake exe roundtrip` + CI diff check — the generator is untrusted
 - [ ] External audit over `Corpus/` — the fourth CI step, and spine decision

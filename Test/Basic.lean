@@ -1,4 +1,5 @@
 import Ledger
+import Corpus.Generated
 
 /-! Compile-time half of the harness. A false `#guard` is an elaboration
 error, so it fails `lake build` before the runtime driver ever starts.
@@ -29,3 +30,10 @@ indentation), and line endings vanish; internal whitespace is identity. -/
 #guard ContentHash.ofText "a claim\nwrapped" = ContentHash.ofText "a claim wrapped"
 #guard ContentHash.ofText "a claim" ≠ ContentHash.ofText "a  claim"
 #guard ContentHash.ofText "" = ContentHash.fnvOffset
+
+/-! The generated corpus is untrusted (`UNTRUSTED_XLATE`): re-derive its
+claims in the kernel — the row is present, and the hash literal `gen` emitted
+is what the library's own hash function computes from the emitted text. -/
+
+#guard Corpus.ledger.map (·.row.label) = [`LEAST_FIX]
+#guard Corpus.C.LEAST_FIX.hash = ContentHash.ofText Corpus.C.LEAST_FIX.text

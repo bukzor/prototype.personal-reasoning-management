@@ -1,0 +1,161 @@
+import Ledger.Core
+import Ledger.Hash
+
+/-! # `lake exe gen` -- corpus/ frontmatter to `Corpus/Generated.lean`
+
+The authoring surface is llm-kb markdown; the record is Lean
+(`SURFACE_SPLIT`). This generator parses `corpus/**.kb/*.md` frontmatter into
+registry rows -- generation, not elab-time IO, so the artifact is diffable in
+review and export tools see plain Lean (`UNTRUSTED_XLATE`).
+
+Determinism is load-bearing: CI regenerates and requires `git diff` clean, so
+output depends only on corpus content -- files in sorted path order, dates
+from frontmatter (an `authority:` without a `date:` is an error; the
+generator never invents evidence).
+
+The frontmatter subset is flat and canonical -- one `key: value` per line,
+`premises` as a flow list -- because the round-trip printer must reproduce it
+byte-exact. -/
+
+open System
+
+/-- One corpus claim, as authored. -/
+structure Entry where
+  /-- Source file, for provenance comments and error messages. -/
+  path : FilePath
+  /-- The claim label, a plain identifier. -/
+  label : String
+  /-- The surface statement (hash input, after the quotient). -/
+  text : String
+  /-- Premise labels (`ARROWS!`); motivation, not entailment. -/
+  premises : List String := []
+  /-- Stipulating authority, when present; only `user` is understood. -/
+  authority : Option String := none
+  /-- Judgment date for the authority's verdict, ISO 8601. -/
+  date : Option String := none
+
+/-- Fail with the offending file in the message. -/
+def fail (path : FilePath) (msg : String) : IO α :=
+  throw <| IO.userError s!"{path}: {msg}"
+
+/-- A label must be a plain Lean identifier: no escaping in the emitter. -/
+def validLabel (s : String) : Bool :=
+  !s.isEmpty && !s.front.isDigit
+    && s.foldl (fun ok c => ok && (c.isAlphanum || c == '_')) true
+
+/-- Parse one `key: value` frontmatter line. -/
+def parseLine (path : FilePath) (line : String) : IO (String × String) := do
+  match line.splitOn ":" with
+  | key :: rest =>
+    if rest.isEmpty then
+      fail path s!"not a key: value line: {line}"
+    else
+      pure (key.trimAscii.copy, (String.intercalate ":" rest).trimAscii.copy)
+  | [] => fail path s!"not a key: value line: {line}"
+
+/-- Parse a flow list `[A, B]` into its elements. -/
+def parseFlowList (path : FilePath) (value : String) : IO (List String) := do
+  let inner := value.trimAscii.copy
+  unless inner.startsWith "[" && inner.endsWith "]" do
+    fail path s!"expected a flow list [A, B], got: {value}"
+  pure <| ((inner.drop 1).dropEnd 1).copy.splitOn ","
+    |>.map (·.trimAscii.copy) |>.filter (· ≠ "")
+
+/-- Parse the frontmatter block of one corpus file into an `Entry`. Body
+text below the closing `---` is kb prose, not record. -/
+def parseFile (path : FilePath) : IO Entry := do
+  let contents ← IO.FS.readFile path
+  let lines := contents.splitOn "\n"
+  match lines with
+  | first :: rest =>
+    unless first.trimAscii.copy.startsWith "---" do
+      fail path "no frontmatter: first line must open with ---"
+    let block := rest.takeWhile (fun l => l.trimAscii.copy ≠ "---")
+    unless rest.length > block.length do
+      fail path "unterminated frontmatter: no closing ---"
+    let mut entry : Entry :=
+      { path, label := "", text := "" }
+    for line in block do
+      if line.trimAscii.copy.isEmpty then
+        continue
+      let (key, value) ← parseLine path line
+      match key with
+      | "claim" => entry := { entry with label := value }
+      | "text" => entry := { entry with text := value }
+      | "premises" => entry := { entry with premises := ← parseFlowList path value }
+      | "authority" => entry := { entry with authority := some value }
+      | "date" => entry := { entry with date := some value }
+      | _ => fail path s!"unknown frontmatter key: {key}"
+    unless validLabel entry.label do
+      fail path s!"claim label must be a plain identifier, got: {entry.label}"
+    if entry.text.isEmpty then
+      fail path "missing text:"
+    unless entry.premises.all validLabel do
+      fail path s!"premise labels must be plain identifiers: {entry.premises}"
+    match entry.authority with
+    | some "user" =>
+      if entry.date.isNone then
+        fail path "authority: without date: -- the generator never invents evidence"
+    | some other => fail path s!"unsupported authority: {other}"
+    | none => pure ()
+    pure entry
+  | [] => fail path "empty file"
+
+/-- All corpus claim files, sorted so output is deterministic. -/
+def corpusFiles (root : FilePath) : IO (Array FilePath) := do
+  let paths ← root.walkDir
+  let files := paths.filter fun p =>
+    p.extension == some "md"
+      && p.fileName != some "CLAUDE.md"
+      && (p.parent.map (·.toString.endsWith ".kb")).getD false
+  pure <| files.qsort (·.toString < ·.toString)
+
+/-- Render a `UInt64` as padded hex, matching how humans cite hashes. -/
+def hex (n : UInt64) : String :=
+  let digits := String.ofList <| Nat.toDigits 16 n.toNat
+  "0x" ++ "".pushn '0' (16 - digits.length) ++ digits
+
+/-- Emit one registry row definition. -/
+def emitRow (e : Entry) : String :=
+  let h := hex <| ContentHash.ofText e.text
+  let premises := e.premises.map (s!"`{·}")
+  let evidence := match e.authority, e.date with
+    | some "user", some date =>
+      s!"[\{ source := .user, judged := {h}, date := {reprStr date} }]"
+    | _, _ => "[]"
+  s!"/-- Registry row generated from `{e.path}`. -/
+def C.{e.label} : ClaimMeta where
+  label := `{e.label}
+  hash := {h}
+  text := {reprStr e.text}
+  premises := [{String.intercalate ", " premises}]
+  evidence := {evidence}"
+
+/-- Emit the whole generated module. -/
+def emit (entries : Array Entry) : String :=
+  let rows := entries.map emitRow
+  let cells := entries.map (s!"  \{ row := C.{·.label}, depth := .stated }")
+  String.intercalate "\n\n" <| (
+    #["-- Generated by `lake exe gen`; do not edit (`UNTRUSTED_XLATE`).
+import Ledger.Core
+
+namespace Corpus"]
+    ++ rows
+    ++ #[s!"/-- The registry (`NATIVE!`), one row per corpus claim, in
+sorted-path order. -/
+def ledger : Ledger := [
+{String.intercalate ",\n" cells.toList}]
+
+end Corpus
+"]).toList
+
+def main : IO UInt32 := do
+  let files ← corpusFiles "corpus"
+  let entries ← files.mapM parseFile
+  let labels := entries.map (·.label)
+  for e in entries do
+    if (labels.filter (· == e.label)).size > 1 then
+      fail e.path s!"duplicate claim label: {e.label}"
+  IO.FS.writeFile "Corpus/Generated.lean" (emit entries)
+  IO.println s!"gen: {entries.size} claims -> Corpus/Generated.lean"
+  return 0

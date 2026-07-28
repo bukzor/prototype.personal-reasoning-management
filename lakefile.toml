@@ -1,6 +1,6 @@
 name = "Ledger"
 version = "0.1.0"
-defaultTargets = ["Ledger"]
+defaultTargets = ["Ledger", "Corpus"]
 testDriver = "test"
 # Batteries ships the driver; it auto-detects the root modules of our default
 # targets, so there is nothing of ours to maintain.
@@ -25,3 +25,13 @@ globs = ["Test.+"]
 [[lean_exe]]
 name = "test"
 root = "Test.Main"
+
+# The generated record (UNTRUSTED_XLATE). In defaultTargets so `lake build`
+# elaborates the corpus — building is checking.
+[[lean_lib]]
+name = "Corpus"
+globs = ["Corpus.+"]
+
+[[lean_exe]]
+name = "gen"
+root = "Gen.Main"
