@@ -57,7 +57,9 @@ inductive Source where                    -- NAME_THE_JUDGE!: judge recorded
   | imported (doc : String)
 
 structure Degree where                    -- DEGREE!: default full costs nothing
-  truth certainty utility : Rat := 1
+  truth : Rat := 1
+  certainty : Rat := 1
+  utility : Rat := 1
 
 structure Verdict where                   -- EVIDENCE_SHAPE+
   source : Source
@@ -79,13 +81,13 @@ inductive Depth where                     -- DEPTH_ATTEST: artifacts, as data
   | proven    (stmt : Prop) (pf : stmt)   -- the term contains its proof
 
 structure Claim where
-  meta  : ClaimMeta
+  row   : ClaimMeta                       -- `meta` is a reserved keyword
   depth : Depth
 
 abbrev Ledger := List Claim
 ```
 
-Laws run over `ledger.map (·.meta)`, the decidable projection; the pin
+Laws run over `ledger.map (·.row)`, the decidable projection; the pin
 between a row and its `Depth` artifact is the elaborator's job — the
 generator emits them adjacent, and a missing artifact is a build failure,
 which is already a kernel-grade check.
@@ -119,7 +121,7 @@ proof — computed, never listed by hand (`TRUST_BASE`, `INTROSPECT`).
 def WellFormed (rows : List ClaimMeta) : Prop :=
   premisesResolve rows ∧ stipulationsAuthored rows ∧ staleDebtAcknowledged rows
 
-theorem corpus_ok : WellFormed (ledger.map (·.meta)) := by decide
+theorem corpus_ok : WellFormed (ledger.map (·.row)) := by decide
 ```
 
 The staleness scanner is the third conjunct — a verdict whose `judged`

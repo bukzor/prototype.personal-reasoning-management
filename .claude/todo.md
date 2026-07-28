@@ -61,7 +61,17 @@ Setup spine (each item ≈ one small commit; sequenced so each verifies the prev
 
 Framework build order (from `docs/dev/design-sketch.md`; vertical slice first — prove the architecture before widening):
 
-- [ ] `Ledger/Core.lean`: `Source`, `Degree`, `Verdict`, `ClaimMeta`, `Depth`, `Claim`, `Ledger`
+- [x] `Ledger/Core.lean`: `Source`, `Degree`, `Verdict`, `ClaimMeta`, `Depth`, `Claim`, `Ledger`
+  - `Claim`'s row field is `row`, not the sketch's `meta` — `meta` is a
+    reserved keyword (module-system declaration modifier); sketch updated
+  - `Rat` lives in core (`Init.Data.Rat`) on this toolchain; the one
+    Batteries import is `Batteries.Tactic.Lint.Simp`, for
+    `attribute [nolint simpNF] Depth.proven.injEq` (dependent-constructor
+    `injEq` isn't simp-normal — linter noise, not a law)
+  - `Test/` re-pointed off scaffold `hello`: `#guard`s push the derived
+    `DecidableEq` through every core type in the kernel — the same
+    reduction path `Laws.lean`'s `by decide` will take — and `Main`
+    re-checks equality/inequality at runtime
 - [ ] Content hash: formal over the pre-elaboration `Syntax` tree; informal over
       the text after the mechanical quotient (encoding, trailing whitespace, wrap)
 - [ ] `Gen/Main.lean`: `lake exe gen` — `corpus/**.kb/*.md` frontmatter →
