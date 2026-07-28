@@ -35,5 +35,23 @@ indentation), and line endings vanish; internal whitespace is identity. -/
 claims in the kernel — the row is present, and the hash literal `gen` emitted
 is what the library's own hash function computes from the emitted text. -/
 
-#guard Corpus.ledger.map (·.row.label) = [`ASSERT, `LEAST_FIX]
+#guard Corpus.ledger.map (·.row.label)
+  = [`DEMO_DESCRIBED, `DEMO_PROVEN, `ASSERT, `LEAST_FIX]
 #guard Corpus.C.LEAST_FIX.hash = ContentHash.ofText Corpus.C.LEAST_FIX.text
+
+/-! Depth artifacts (`DEPTH_ATTEST`): each generated cell carries the depth
+its authored `stmt:`/`proof:` keys pay for, and a proven claim's proof term
+re-checks in the kernel against its statement. -/
+
+/-- Constructor tag of a `Depth`, for guards -- `Depth` itself carries
+proof terms, so it has no `DecidableEq`. -/
+def depthKind : Depth → String
+  | .stated => "stated"
+  | .described _ => "described"
+  | .proven _ _ => "proven"
+
+#guard Corpus.ledger.map (fun c => depthKind c.depth)
+  = ["described", "proven", "stated", "stated"]
+
+example : Corpus.C.DEMO_PROVEN.stmt := Corpus.C.DEMO_PROVEN.pf
+example : Corpus.C.DEMO_DESCRIBED.stmt := fun n => Nat.add_zero n

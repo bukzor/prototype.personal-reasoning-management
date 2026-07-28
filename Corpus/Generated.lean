@@ -3,6 +3,33 @@ import Ledger.Core
 
 namespace Corpus
 
+/-- Formal statement authored for `DEMO_DESCRIBED`: the claim made
+propositional. Reducible so proofs can see through the name. -/
+abbrev C.DEMO_DESCRIBED.stmt : Prop := ∀ n : Nat, n + 0 = n
+
+/-- Registry row generated from `corpus/demo.kb/described.md`. -/
+def C.DEMO_DESCRIBED : ClaimMeta where
+  label := `DEMO_DESCRIBED
+  hash := 0x0e8303cdc35da4c6
+  text := "Adding zero changes no natural number."
+  premises := []
+  evidence := []
+
+/-- Formal statement authored for `DEMO_PROVEN`: the claim made
+propositional. Reducible so proofs can see through the name. -/
+abbrev C.DEMO_PROVEN.stmt : Prop := 2 + 2 = 4
+
+/-- Proof authored for `DEMO_PROVEN`: `stmt` discharged. -/
+theorem C.DEMO_PROVEN.pf : C.DEMO_PROVEN.stmt := by decide
+
+/-- Registry row generated from `corpus/demo.kb/proven.md`. -/
+def C.DEMO_PROVEN : ClaimMeta where
+  label := `DEMO_PROVEN
+  hash := 0xcfee442f0a733586
+  text := "Two and two make four."
+  premises := []
+  evidence := []
+
 /-- Registry row generated from `corpus/ledger.kb/assert.md`. -/
 def C.ASSERT : ClaimMeta where
   label := `ASSERT
@@ -22,6 +49,8 @@ def C.LEAST_FIX : ClaimMeta where
 /-- The registry (`NATIVE!`), one row per corpus claim, in
 sorted-path order. -/
 def ledger : Ledger := [
+  { row := C.DEMO_DESCRIBED, depth := .described C.DEMO_DESCRIBED.stmt },
+  { row := C.DEMO_PROVEN, depth := .proven C.DEMO_PROVEN.stmt C.DEMO_PROVEN.pf },
   { row := C.ASSERT, depth := .stated },
   { row := C.LEAST_FIX, depth := .stated }]
 

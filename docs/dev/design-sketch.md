@@ -154,7 +154,7 @@ arbitrary; the four verbs are not.
 | verb | frontmatter delta | generated |
 |---|---|---|
 | claim | `claim:`, `text:` | registry row, `Depth.stated` |
-| describe | + `stmt:` (Lean prop) | `def X.stmt : Prop` — elaborates, no proof owed |
+| describe | + `stmt:` (Lean prop) | `abbrev X.stmt : Prop` — elaborates, no proof owed; reducible so proofs see through the name |
 | stipulate | + `authority:` | field in its theory's frame, authored (`STIP`) |
 | assert | + `proof:` (tactic block) | `theorem X.pf (f : Frame.θ) : X.stmt`; premises walked from the proof term |
 

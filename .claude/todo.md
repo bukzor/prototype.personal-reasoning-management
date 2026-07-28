@@ -138,7 +138,27 @@ Framework build order (from `docs/dev/design-sketch.md`; vertical slice first �
       (independent Rust type checker, `nanoda-allow-sorry: false`) is the
       genuinely independent re-check, at the cost of a Rust toolchain in CI.
       Revisit once `Corpus/` is real enough that the run time is measurable.
-- [ ] Depth artifacts: `stmt : Prop` attachment (described), `pf : stmt` bundling (proven); staleness conjunct in `WellFormed`
+- [x] Depth artifacts: `stmt : Prop` attachment (described), `pf : stmt` bundling (proven); staleness conjunct in `WellFormed`
+  - verbs landed: `stmt:` emits `abbrev C.X.stmt : Prop` (abbrev, not the
+    sketch's `def` -- same reducibility lesson as the law predicates;
+    sketch updated) and `.described` cell; `proof:` emits
+    `theorem C.X.pf : C.X.stmt := by ...` and `.proven`. Frame-free until
+    `Corpus/Frames.lean`; the Frames item retrofits `(f : Frame.θ)`
+  - the staleness conjunct already landed in the Laws item
+    (`staleDebtAcknowledged`); no artifact conjunct is owed on top --
+    deepening never migrates identity (`DEPTH_ATTEST`/`ID_BOUNDARY!`),
+    so verdicts survive a `stmt:` addition by design, and artifact-vs-row
+    drift can't occur mechanically: `gen` re-emits both adjacent
+  - artifacts have no printable value (a compiled `Prop` keeps no
+    surface), so roundtrip audits from the other two ends: compiled
+    `Depth` constructor vs authored keys, and generated text must contain
+    the exact decl line each key dictates (restated independently of the
+    emitter, so an emitter bug can't vouch for itself)
+  - `corpus/demo.kb/` holds the two exemplars (described, proven) --
+    scaffolding, delete when real theories port
+  - negatives verified: `proof:` without `stmt:` fails gen; a misstated
+    described `stmt` (elaborates fine, laws blind to it) and a dropped
+    depth cell both fail roundtrip
 - [ ] `Corpus/Frames.lean`: `stipulate` frames, generated alongside the rows
       (hypothesis bundles, never `axiom`)
 - [ ] Dependency edges walked from proof terms; `#trustbase` = frame fields ∪ `collectAxioms`
