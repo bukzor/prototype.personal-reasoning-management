@@ -32,7 +32,10 @@ Setup spine (each item ≈ one small commit; sequenced so each verifies the prev
   - also turned on `leanchecker: true` now rather than at the AUDIT_SPOKE
     item — the action bundles the checker for toolchains ≥ v4.28.0-rc1, so
     the hedge costs one line today instead of a build step later
-- [~] Test skeleton: `Test/` module + `testDriver` in lakefile; one trivial `#guard` + one runtime assertion; `lake test` green locally and in CI
+- [x] Test skeleton: `Test/` module + `testDriver` in lakefile; one trivial `#guard` + one runtime assertion; `lake test` green locally and in CI
+  - green in CI at f3872a7; no workflow edit needed — `lean-action`
+    auto-config found the driver ("lake check-test succeeded -> will run
+    lake test")
   - `Test/Basic.lean` (`#guard`, kernel, build time) + `Test/Main.lean`
     (runtime, exit code); `testDriver = "test"`. Both halves verified to
     *fail* when broken, then restored — a harness that cannot fail is decor.
