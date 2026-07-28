@@ -7,7 +7,9 @@ Setup spine (each item ≈ one small commit; sequenced so each verifies the prev
 - [x] Breadth-first setup discourse graph (`docs/dev/initial-setup.discourse.kb/`)
 - [x] elan via brew; Brewfile
 - [ ] `lake init`: `lean-toolchain` pin (latest stable), root module `Ledger`, `.gitignore` (`.lake/`); `lake build` green
-  - decide `lakefile.lean` (per design sketch) vs `lakefile.toml` at init time
+  - lakefile.toml — decided 2026-07-28 (community default per core-team RFC
+    leanprover/lean4#4106; all our lakefile needs are declarative;
+    `lake translate-config` makes reversal one command)
 - [ ] Add Batteries dependency (or record core-only decision); commit `lake-manifest.json`
 - [ ] lean.nvim in nvim config (lives in dotfiles repo — breadcrumb only here)
   - verify: infoview shows goals in a scratch theorem; `\forall` → `∀` abbreviation works
