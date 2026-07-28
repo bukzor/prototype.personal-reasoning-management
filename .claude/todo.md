@@ -103,7 +103,19 @@ Framework build order (from `docs/dev/design-sketch.md`; vertical slice first �
   - NOTE for Laws item: `LEAST_FIX`'s premise `ASSERT` is not in the
     corpus — `premisesResolve` will fail until `ASSERT` is ported or the
     premise list is trimmed
-- [ ] `Ledger/Laws.lean`: `WellFormed` + `theorem corpus_ok := by decide` — vertical slice end to end over one kb file
+- [x] `Ledger/Laws.lean`: `WellFormed` + `theorem corpus_ok := by decide` — vertical slice end to end over one kb file
+  - the three conjuncts at slice fidelity: `premisesResolve` (arrows land
+    on rows), `stipulationsAuthored` (every verdict names judge + date —
+    anonymous fiat would be `NO_AXIOMS` violated), `staleDebtAcknowledged`
+    (no acknowledgment mechanism yet, so the bound is zero: every verdict
+    pins the current hash)
+  - law predicates are `abbrev` — `by decide` needs reducibility to find
+    the `Decidable` instances through the definitions
+  - `ASSERT` ported to `corpus/ledger.kb/assert.md` (bare, no evidence —
+    its `certified(review 089)` record awaits richer verbs) so
+    `LEAST_FIX`'s arrow resolves
+  - negative case verified: a dangling premise makes `decide` refute
+    `WellFormed` and the build dies in `Ledger.Laws`
 - [ ] `Gen/Print.lean`: `lake exe roundtrip` + CI diff check — the generator is untrusted
 - [ ] External audit over `Corpus/` — the fourth CI step, and spine decision
       #5's only hedge against all-in Lean (`AUDIT_SPOKE`), so it is committed

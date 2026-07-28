@@ -35,5 +35,5 @@ indentation), and line endings vanish; internal whitespace is identity. -/
 claims in the kernel — the row is present, and the hash literal `gen` emitted
 is what the library's own hash function computes from the emitted text. -/
 
-#guard Corpus.ledger.map (·.row.label) = [`LEAST_FIX]
+#guard Corpus.ledger.map (·.row.label) = [`ASSERT, `LEAST_FIX]
 #guard Corpus.C.LEAST_FIX.hash = ContentHash.ofText Corpus.C.LEAST_FIX.text

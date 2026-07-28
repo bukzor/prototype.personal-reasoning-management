@@ -3,6 +3,14 @@ import Ledger.Core
 
 namespace Corpus
 
+/-- Registry row generated from `corpus/ledger.kb/assert.md`. -/
+def C.ASSERT : ClaimMeta where
+  label := `ASSERT
+  hash := 0xfd62388b49640db1
+  text := "All non-stipulated claims are asserted: proven exactly to the extent their requirements are proven"
+  premises := []
+  evidence := []
+
 /-- Registry row generated from `corpus/ledger.kb/least-fix.md`. -/
 def C.LEAST_FIX : ClaimMeta where
   label := `LEAST_FIX
@@ -14,6 +22,7 @@ def C.LEAST_FIX : ClaimMeta where
 /-- The registry (`NATIVE!`), one row per corpus claim, in
 sorted-path order. -/
 def ledger : Ledger := [
+  { row := C.ASSERT, depth := .stated },
   { row := C.LEAST_FIX, depth := .stated }]
 
 end Corpus
