@@ -24,8 +24,11 @@ Setup spine (each item ≈ one small commit; sequenced so each verifies the prev
     Batteries-only datum and tactic. Nothing under `Ledger/` imports it yet.
 - [ ] lean.nvim in nvim config (lives in dotfiles repo — breadcrumb only here)
   - verify: infoview shows goals in a scratch theorem; `\forall` → `∀` abbreviation works
-- [~] CI: `.github/workflows/ci.yml` with `leanprover/lean-action@v1` (`build-args: "--wfail"`); push, verify green on origin
+- [x] CI: `.github/workflows/ci.yml` with `leanprover/lean-action@v1` (`build-args: "--wfail"`); push, verify green on origin
   - scaffold's `lean_action_ci.yml` renamed; `--wfail` verified locally
+  - green on origin at f3fcf3e in 25s; log confirms both flags took effect
+    (`BUILD_ARGS: --wfail`, "Using bundled leanchecker from the active Lean
+    toolchain") rather than being silently ignored
   - also turned on `leanchecker: true` now rather than at the AUDIT_SPOKE
     item — the action bundles the checker for toolchains ≥ v4.28.0-rc1, so
     the hedge costs one line today instead of a build step later
